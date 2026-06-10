@@ -1,0 +1,711 @@
+CS 35L Software
+Construction
+Lecture 13 ­ Make &
+C Programming
+
+Tobias Dürschmid
+Assistant Teaching Professor
+Computer Science Department
+Why Learn C?
+
+  Speed
+
+C compiles directly to machine code & is very close to direct hardware
+instructions. This allows experts to optimize performance
+
+  Memory Management
+
+C allows for explicit and direct manipulation of memory.
+This requires careful coding. It enables programmers to write highly
+optimized code and manage resources precisely.
+
+  Hardware Interaction
+
+C is unmatched when you need to interface directly with hardware, making it
+
+essential for device drivers and firmware.
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming              2
+
+Tobias Dürschmid
+Most of the Software you use Every Day is
+Runs on Applications Written in C
+
+    Operating Systems
+
+  Linux & Windows kernels due to speed & direct access to hardware & memory
+
+    Embedded Systems and IoT devices
+
+  due to small memory footprint and direct hardware access
+
+    Compilers and Assemblers
+
+  due to small memory footprint and direct hardware access
+
+    Database Management Systems
+
+  MySQL, PostgreSQL core code
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming              3
+
+Tobias Dürschmid
+C++ builds on C
+
+· C is purely procedural (functions and data are kept separate) while
+  C++ is object-oriented (encapsulating functions and data into classes)
+
+· No Classes or Objects
+   · No inheritance or polymorphism
+   · Structs allow you to define data structures
+
+       struct list_element {
+                   int value;
+                   struct list_element* next; // Linked list
+
+       };
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming           4
+
+Tobias Dürschmid
+C has No Function Overloading
+
+Each function must have a unique name
+
+In C++:                                            In C:
+
+void print(int value)    Function Overloading      void printInt(int value)
+{...}                     (functions are allowed   {...}
+                         to have the same name
+void print(float value)  but different signature)  void printFloat(float value)
+{...}                                              {...}
+
+int main() {                                       int main() {
+     int a = 5;                                         int a = 5;
+     float b = 5.00;                                    float b = 5.00;
+     print(a);                                          printInt(a);
+     print(b);                                          printFloat(b);
+
+}                                                  }
+
+         CS 35L Software Construction: Lecture 13 ­ Make & C Programming         5
+
+         Tobias Dürschmid
+C has No Pass-by-References
+
+· Only pointers are available
+· Parameters passing always involved either values or pointers
+
+In C++:                                                     In C:                Pure Pointers
+
+void swap(int &a, int &b) {                                 void swap(int *a, int *b) {
+                                                               int temp = *a;
+   int temp = a;                                               *a = *b;
+                                                               *b = temp;
+   a = b;
+                                                            }
+   b = temp;
+                                                            int main() {
+}                 Pass by Reference                            int x = 30;
+                                                               int y = 40;
+int main() {      passing arguments to a function where        swap(&x, &y);
+   int x = 30;    the function receives a reference to the
+   int y = 40;    original variable in memory, rather than
+   swap(x, y);
+                               a copy of its value
+
+                CS 35L Software Construction: Lecture 13 ­ Make & C Programming                 6
+
+                Tobias Dürschmid
+No built-in try/catch blocks for Error Handling
+
+· Instead: return values are used to indicate error                     Now the result has to be a
+                                                                              pointer argument
+
+In C++:                                       In C:
+
+int safe_divide(int num, int den) {           int safe_divide(int num, int den, int* result) {
+
+   if (num == 0) {                               if (num == 0) {
+
+      throw std::runtime_error("div by 0");         return -1; // Indicate an error
+
+   }                                             }
+
+   return numerator / denominator;               *result = num / den;
+
+}                                                return 0; // Indicate success
+
+int main() {                                  }
+
+   int x = 10, y = 0, z;                      int main() {
+
+   try {                                         int x = 10, y = 0, z;
+
+      z = safe_divide(x, y);                     if (safe_divide(x, y, &z) != 0) {
+
+      printf("Result: %d\n", z);                    printf("Error: Division by zero occurred.\n");
+
+   }                                             } else {
+
+   catch (const std::runtime_error& e) {            printf("Result: %d\n", z);
+
+      std::cerr << " Error: Division by zero     }
+
+occurred " << e.what() << std::endl;             return 0;
+
+   }                                          }
+
+}
+
+                    CS 35L Software Construction: Lecture 13 ­ Make & C Programming                 7
+
+                    Tobias Dürschmid
+Again, WWHHYYYY Would Someone Use C
+Instead of C++ ???
+
+    Smaller Executable
+
+  C compilers often generate smaller binaries because C doesn't include the
+  large runtime support libraries or necessary metadata associated with C++
+  features like exceptions or virtual tables & constructors/destructors for objects.
+  This is crucial for environments with limited memory (e.g., embedded systems)
+
+    Predictable Execution
+
+  C gives the developer almost complete control over memory allocation and
+  function calls. C++ introduces hidden operations (like constructor calls,
+  exception unwinding, and virtual function lookups) that can make execution
+  time less predictable.
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming                       8
+
+Tobias Dürschmid
+Again, WWHHYYYY Would Someone Use C
+Instead of C++ ???
+
+   Library Interface
+
+ Almost all programming languages (including Python, Java, C#) support calling
+ C functions & can therefore use C libraries.
+ Picking C allows you to write a library with the widest possible compatibility
+
+import ctypes
+import os
+
+# 1. Determine the correct library       # 2. Load the shared library
+# file name based on the OS              try:
+if os.name == 'posix': # Linux or macOS
+                                                c_lib = ctypes.CDLL(lib_file)
+       lib_file = './my_c_lib.so'        except OSError as e:
+elif os.name == 'nt': # Windows
+                                                print(f"Error loading library: {e}")
+       lib_file = './my_c_lib.dll'              print("Make sure you compiled the C
+else:                                    file into the correct shared library.")
+                                                exit()
+       raise OSError("Unsupported OS.")
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming                       9
+
+Tobias Dürschmid
+Memory Management in C
+
+· void *malloc(size_t size)allocates memory of a given size on the heap
+· void free(void *ptr) deallocates the memory
+
+   · If you don't free the memory, you will have a memory leak
+   · Accessing memory that is not currently allowed by your program results in a
+
+     segmentation fault ("segfault")
+
+int* matrix1 = (int*)malloc(rows * cols * sizeof(int));
+[...]
+free(matrix1);
+
+See https://www.geeksforgeeks.org/c/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming                                           10
+
+Tobias Dürschmid
+Reading a File in C              #include <stdio.h>
+                                 int main() {
+
+                                        FILE *file;
+                                        int buffer[5];
+
+· fopen opens a file                    // Open the binary file for reading
+· fread reads a given amount of         file = fopen("input.bin", "rb");
+                                        if (file == NULL) {
+  data from a file stream
+· fclose closes the file (you                  perror("Error opening file");
+                                               return 1;
+  should always close the file          }
+  after you are done reading)
+· All three are library calls           // Read the integers from the file into the buffer
+                                        fread(buffer, sizeof(int), 5, file);
+
+                                        for (int i = 0; i < 5; i++) {
+                                               printf("Element %d: %d\n", i + 1, buffer[i]);
+
+                                        }
+
+                                        // Close the file
+                                        fclose(file);
+                                        return 0;
+                                 }
+
+See: https://www.geeksforgeeks.org/c/fread-function-in-c/
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming  11
+
+Tobias Dürschmid
+Library Calls
+
+· fread is a standard C library function that provides buffered input/output
+  operations
+
+· While fread interacts with the operating system to read data from files, it does so
+
+  by making calls to lower-level system calls as needed.         Your Program
+· malloc and free are also library calls
+
+· When creating an executable, the linker selects                       libc
+  the libc implementation for your target operating system       stdio stdlib
+
+                                                                 Operating System
+
+                                                                 Hardware
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming                        12
+
+Tobias Dürschmid
+Compiler & Linker Create an Executable
+from Source Code
+
+  Compiler/Assembler
+
+Translates your source code into assembly code (also knows as an "object file")
+
+your_file.c  Compiler        your_file.o
+
+  Linker
+
+Resolves referenced but not defined symbols (function names, global variables)
+Copies code sections from object files that define those symbols into the
+executable (static linking) or defers until program execution (dynamic linking)
+
+                  library.o
+
+your_file.o       Linker     executable
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming                  13
+
+Tobias Dürschmid
+Important C Language Elements
+
+· Characters & Strings:
+   · 'a' is a single character ('\0' not the character for zero but the character
+     with ASCII value zero (end of string)
+   · "a" is a string (char* or char[]) (don't forget #include <string.h>)
+
+· Use const to indicate that the variable should not be changed
+   · const char* does not let you write into the memory of the pointer
+
+· const in C is a great way to avoid accidentally usings a variable in the wrong
+  way so it prevents some bugs
+
+· you can cast away the costness but avoid this!)
+
+char buffer[] = "Initial string"; // Modifiable array on the stack
+const char *p_const = buffer; // p_const prevents modifications to the buffer
+char *p_writable = (char *)p_const; // p_writable re-enables modifications
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming                    14
+
+Tobias Dürschmid
+Goto allows you to jump to a different, Labeled
+Code Location
+
+#include <stdio.h>
+int main() {
+
+       int num;
+       printf("Enter a number: ");
+       scanf("%d", &num);
+       if (num > 0) {
+
+              goto positive;
+       }
+       goto end;
+
+positive: // A label named 'positive'
+       // This block is reached only by the goto statement above
+       printf("It is a positive number.\n");
+
+end: // A label named 'end' for a clean exit point
+
+       printf("Program finished.\n");
+       return 0;
+}
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming   15
+
+Tobias Dürschmid
+Edsger Dijkstra: "Go To Statement Considered
+                                       Dijkstra's 1968 paper
+Harmful"
+                                       Scanned image of Edsger Dijkstra's 1968 paper titled 'Go To Statement Considered Harmful,' published in Communications of the ACM. Th
+
+                                       paper argSuees ethaht utsteposf t:h/e/hGOoTmO setapteamgenet ssh.oculwd bie.nablo/~lishsetdofrromm h/tigehear-clehveilnpgrog/rraemamdineg lra/nDguiajgkess.tra68.pdf
+
+#include <stdio.h>
+int main() {
+
+       int num;
+       printf("Enter a number: ");
+       scanf("%d", &num);
+       if (num > 0) {
+
+              goto positive;
+       }
+       goto end;
+
+positive: // A label named 'positive'
+       // This block is reached only by the goto statement above
+       printf("It is a positive number.\n");
+
+end: // A label named 'end' for a clean exit point
+
+       printf("Program finished.\n");
+       return 0;
+}
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming   16
+
+Tobias Dürschmid
+CS 35L Software
+Construction
+Lecture 13 ­ Make &
+Makefiles
+
+Tobias Dürschmid
+Assistant Teaching Professor
+Computer Science Department
+Let's Bake a Bruin Cake!
+
+                  Final Cake
+
+Chocolate Layers  Raspberry Filling  Buttercream
+
+flour cocoa eggs sugar raspberies lemon juice butter powdered sugar vanilla
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming              18
+
+Tobias Dürschmid
+Let's Bake a Bruin Cake!
+
+Was actually SALT! But we   Final Cake
+got some new ingredients
+
+  Now it's actually sugar!
+    What should we do?
+
+Chocolate Layers            Raspberry Filling  Buttercream
+
+flour cocoa eggs sugar raspberies lemon juice butter powdered sugar vanilla
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming              19
+
+Tobias Dürschmid
+Let's Bake a Bruin Cake!
+
+                                FiFnainlaCl aCkaeke
+
+ChCohcooclaotlaeteLaLyaeyresrs  RaRsapsbpebreryrrFyilFliinllging  BuBttuettrecrceraemam
+
+flour cocoa eggs sugar raspberies lemon juice butter powdered sugar vanilla
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming                          20
+
+Tobias Dürschmid
+GNU Make is a Universal Build Automation Tool
+
+  Goal: Incremental Build Automation
+
+With so many different source files, compilation & linking steps,
+
+how can I automate the build of a large program while only re-building parts
+
+of the program for which the source files have changed?
+
+  Solution: GNU Make
+
+· Automates building, installing, uninstalling, and testing a package
+· Figures out automatically which files it needs to update, based on which
+
+   source files have changed.
+· Language-independent (C, C++, Java, LaTeX, ...)]
+· Specify steps in Makefile
+
+See https://www.gnu.org/software/make/
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming               21
+
+Tobias Dürschmid
+                                                                                                            See https://makefiletutorial.com/
+
+Anatomy of a Very Simple Makefile
+
+  Build Target                            Makefile
+                                         target: prereq_1 prereq_2 ...
+A product / file you want to produce
+(e.g., executable, object file, ...)               command_1
+or a task you want to perform                      command_2
+(e.g., "install", "test").
+The name of the build target should be   mysrc.o: mysrc.c
+the name of the produced file.
+                                                   cc mysrc.c ­o mysrc.o
+  Prerequisites
+                                                       cc is the C compiler
+A list of build targets that need to be
+made before this build target and files      Command
+that are used to make this target
+                                          a sequence of shell commands to
+                                          build the target or to perform the task
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming                    22
+
+Tobias Dürschmid
+                                                                                                            See https://makefiletutorial.com/
+
+Make Allows you to Build in Multiple Steps
+
+· Before making a build                           Makefile
+  target, make first makes                      myprogam: mysrc.o
+  all the dependencies              Runs last cc mysrc.o ­o myprogam
+  (unless they have not
+  changed)                                      mysrc.o: mysrc.c
+                                  Runs second cc mysrc.c ­o mysrc.o
+
+· Dependencies have               mysrc.c:
+  changed if and only if the
+  modification date of their      Runs first echo "int main()
+  file is newer than that of the              {\n\treturn 0; \n}" > mysrc.c"
+  build target
+                                  Terminal     Run with any build
+                                            target you want to make
+
+                                  make myprogram
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming       23
+
+Tobias Dürschmid
+                                                                                                            See https://makefiletutorial.com/
+
+Make Allows you to Build in Multiple Steps
+
+                               Makefile
+                             myprogam: mysrc.o
+                  Runs last cc mysrc.o ­o myprogam
+
+                                mysrc.o: mysrc.c
+                  Runs second cc mysrc.c ­o mysrc.o
+
+                  mysrc.c:
+
+                  Runs first echo "int main()
+                              {\n\treturn 0; \n}" > mysrc.c"
+
+                  Terminal     Run with any build
+                            target you want to make
+
+                  make myprogram
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming  24
+
+Tobias Dürschmid
+If a Build Target should ALWAYS                         See https://makefiletutorial.com/
+be made, Define it as .PHONY
+
+  How it works                            Makefile
+                                         .PHONY: test clean
+· Commands of build targets listed       test:
+
+   as .PHONY will always be
+
+executed when the build target is                 pytest tests
+made.                                    clean:
+
+                                                  rm ­r *.o
+
+When to use Phony
+
+· You want to create a file with the name of a build target that a task that
+
+does not make this files (e.g., "test")
+
+· Performance: Skip checking whether the files are new
+
+· Commands commonly made phony: all, clean, test
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming               25
+
+Tobias Dürschmid
+                             See https://makefiletutorial.com/
+
+Makefiles Support Variables
+
+                   Makefile
+                  VARIABLE_NAME = definition
+                  SRCS = mysrc1.c mysrc2.c
+                  OBJS = $(SRCS:.c=.o)
+                  myprog: $(OBJS)
+
+                           cc $(OBJS) -o myprog
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming  26
+
+Tobias Dürschmid
+                                                  See https://makefiletutorial.com/
+
+Makefiles Support Variables
+
+· Variables are defined with a    Makefile
+  string that should substitute  VARIABLE_NAME = definition
+  the variable name later
+                                 SRCS = mysrc1.c mysrc2.c
+· $(VARNAME) uses the
+  variable                       OBJS = $(SRCS:.c=.o)
+
+· Make supports string-          myprog: $(OBJS)  Replaces .c with .o
+  replace in variables using
+  the syntax: $(VAR:search       cc $(OBJS) -o myprog
+  _pattern=replacement
+  _text)                                          Translates to:
+                                 cc mysrc1.o mysrc2.o ­o myprog
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming        27
+
+Tobias Dürschmid
+Pattern Rules are Templates                      See https://makefiletutorial.com/
+
+For Creating Many Rules with the Same Structure
+
+· % is a wildcard that matches                   Can we use variables to
+  any non-empty substring
+                                Makefile         refactor the Makefile?
+· When used in the
+  prerequisite pattern, the     VARIABLE_NAME = definition
+  wildcard % adds the
+                                SRCS = mysrc1.c mysrc2.c
+
+                                OBJS = $(SRCS:.c=.o)
+
+matched string.                 myprog: $(OBJS)
+
+· $@ is the name of the build   cc $(OBJS) -o myprog
+
+target of the rule              %.o: %.c
+
+· $< is the first prerequisite  cc $< -o $@
+  of the rule ($^ is all
+  prerequisites)                                For mysrc1.o translates to:
+                                              cc mysrc1.c ­o mysrc1.o
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming           28
+
+Tobias Dürschmid
+Pattern Rules are Templates                See https://makefiletutorial.com/
+
+For Creating Many Rules with the Same Structure
+
+Variables allow you to refactor   Makefile
+your Makefile to reduce          SRCS = mysrc1.c mysrc2.c
+duplication.                     TARGET = myprog
+If we want to rename the         OBJS = $(SRCS:.c=.o)
+program name, we only need to    $(TARGET): $(OBJS)
+do this in one place
+                                          cc $(OBJS) -o $(TARGET)
+
+                                 %.o: %.c
+
+Can we refactor this Makefile             cc $< -o $@
+         even further???         clean:
+
+                                          rm ­f $(OBJS) $(TARGET)
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming    29
+
+Tobias Dürschmid
+Pattern Rules are Templates    See https://makefiletutorial.com/
+
+For Creating Many Rules with the Same Structure
+
+If we want to use a different   Makefile
+C compiler (gcc, clang) we     SRCS = mysrc1.c mysrc2.c
+                               TARGET = myprog
+   can simply change this      OBJS = $(SRCS:.c=.o)
+                here           CC = gcc
+                               $(TARGET): $(OBJS)
+
+                                        $(CC) $(OBJS) -o $(TARGET)
+                               %.o: %.c
+
+                                        $(CC) $< -o $@
+                               clean:
+
+                                        rm ­f $(OBJS) $(TARGET)
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming     30
+
+Tobias Dürschmid
+                                                       See https://makefiletutorial.com/
+
+The stereotypical Makefile for C Programs
+
+If we want to compile Makefile
+
+with different compiler      SRCS = mysrc1.c mysrc2.c
+flags (arguments to the
+                             TARGET = myprog
+    compiler) we can
+    change this here         OBJS = $(SRCS:.c=.o) Shows all compiler
+                             CC = clang
+                                                       warnings
+                             CCFLAGS = -Wall
+
+Runs static analysis         CHECKFLAGS = --analyze ­Xanalyzer
+
+(automatic analysis of your                            -analyzer-checker=core
+
+   source code) to detect    $(TARGET): $(OBJS)
+  issue such as resource               $(CC) $(CCFLAGS) -o $(TARGET) $(OBJS)
+leaks due to missing free
+and fclose, double free,     %.o: %.c
+                                       $(CC) $(CCFLAGS) -c $< -o $@
+ null pointer dereferences
+                             clean:
+
+                             rm ­f $(OBJS) $(TARGET)
+
+CS 35L SoftwarecChoensctkru:ction: Lecture 13 ­ Make & C Programming          31
+
+Tobias Dürschmid             $(CC) $(CCFLAGS) $(CHECKFLAGS) $(SRCS)
+Please fill out your Exit Tickets on Bruin Learn!
+
+In your own words, please summarize three key insights you learned about C
+Programming and Makesfiles today. (Do not copy phrases from the lecture slides)
+
+Why is GNU Make more useful for C/C++ than for Python and JavaScript?
+Please describe one use case that applies to C/C++ but not to Python & JS
+and one use case that still applies to Python & JS.
+
+Please leave any questions that you have about today's material and things that are
+still unclear or confusing to you (if none, simply write N/A)
+
+Credits: These slide use images from Flaticon.com (Creators: Freepik)
+
+CS 35L Software Construction: Lecture 13 ­ Make & C Programming                      32
+
+Tobias Dürschmid
+

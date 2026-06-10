@@ -1,0 +1,480 @@
+% =========================================================================
+%  CS35L FINAL CHEATSHEET  --  US Letter, front + back (2 pages)
+%  Compile:  pdflatex cheatsheet.tex
+% =========================================================================
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[top=0.20in,bottom=0.20in,left=0.20in,right=0.20in]{geometry}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{array}
+\usepackage{tabularx}
+
+% ------------------------------- COLORS -----------------------------------
+\definecolor{hdrBG}{HTML}{1F1F1F}
+\definecolor{hdrFG}{HTML}{FFFFFF}
+\definecolor{boxFr}{HTML}{5A5A5A}
+\definecolor{accent}{HTML}{0F4C81}
+\definecolor{warnC}{HTML}{B00020}
+\definecolor{okC}{HTML}{1B5E20}
+\definecolor{codeBG}{HTML}{EFEFEF}
+
+% ------------------------------- LAYOUT -----------------------------------
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1pt}
+\setlength{\columnsep}{6pt}
+\setlength{\columnseprule}{0.3pt}
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
+
+\renewcommand{\arraystretch}{0.95}
+
+% ------------------------------- COMMANDS ---------------------------------
+% Topic environment: dark title bar + framed content, no external pkgs.
+\newenvironment{topic}[1]{%
+  \par\addvspace{1.5pt}%
+  \noindent\colorbox{hdrBG}{%
+    \begin{minipage}{\dimexpr\linewidth-2\fboxsep\relax}%
+      \centering\bfseries\sffamily\fontsize{6pt}{7pt}\selectfont\color{hdrFG}\MakeUppercase{#1}%
+    \end{minipage}%
+  }\par\nobreak\vskip0.5pt%
+  \begingroup\setlength{\leftskip}{0pt}\setlength{\rightskip}{0pt}%
+}{%
+  \endgroup\par\addvspace{0.5pt}%
+}
+
+\newcommand{\warn}[1]{\textcolor{warnC}{\textbf{#1}}}
+\newcommand{\ok}[1]{\textcolor{okC}{\textbf{#1}}}
+\newcommand{\hd}[1]{\textcolor{accent}{\textbf{#1}}}
+\newcommand{\co}[1]{{\ttfamily\small\colorbox{codeBG}{\strut #1}}}
+\newcommand{\cn}[1]{{\ttfamily\small #1}}
+
+% =========================================================================
+\begin{document}
+\fontsize{5.6pt}{6.4pt}\selectfont
+
+% ========================== PAGE 1 (FRONT) ===============================
+\begin{multicols*}{3}
+
+% ------------------------------ SHELL ------------------------------------
+\begin{topic}{Shell / Bash}
+\hd{Files:} \cn{ls -la}\,\cn{cd ..}\,\cn{pwd}\,\cn{mkdir -p}\,\cn{cp -r}\,\cn{mv}\,\cn{rm -rf}\,\cn{touch}\,\cn{rmdir} (empty only).\\
+\hd{Text:} \cn{cat}\,\cn{grep PAT f}\,\cn{sed 's/A/B/g'}\,\cn{tr a-z A-Z} (stdin)\,\cn{sort -nru}\,\cn{uniq -c} (\warn{adjacent!})\,\cn{wc -lwc}\,\cn{cut -d: -f1}\,\cn{awk '\{print \$2\}'}\,\cn{head/tail -n}\,\cn{tail -f}\,\cn{comm}(sorted).\\
+\hd{Perms:} \cn{chmod +x}; 755 exec, 644 file, 600 secret. \cn{which}, \cn{type -a}, \cn{export VAR=v}, \cn{source f}=\cn{. f}.\\
+\hd{I/O:} \cn{>} overwrite, \cn{>>} append, \cn{2>} err, \cn{2>\&1} err$\to$out, \cn{<} stdin, \cn{|} pipe, \cn{<<EOF} heredoc, \cn{<<<} herestring, \cn{<(cmd)} proc-sub.\\
+\hd{Exit:} 0=ok, 1=err, 2=misuse, 126=not exec, 127=not found, 130=Ctrl-C. \cn{\$?}=last.\\
+\hd{Vars:} no space around \cn{=}. Always \cn{"\$VAR"}. \cn{\$\{1:-def\}}, \cn{\$\{1:=def\}}, \cn{\$\{p\#\#*/\}} basename, \cn{\$\{f\%.*\}} noext, \cn{\$\{s/A/B\}}, \cn{\$\{s//A/B\}} all.\\
+\hd{Test [ ]:} \cn{-f} file, \cn{-d} dir, \cn{-z} empty, \cn{-eq -ne -lt -gt} int, \cn{= !=} str, \cn{!} not. \cn{[[ ]]} = bash: no word-split, \cn{\&\&} \cn{||} \cn{=\textasciitilde} regex inside.\\
+\hd{Control:} \cn{for i in 1 2 3; do .. done}; \cn{for ((i=0;i<n;i++))}; \cn{while [ ]; do .. done}; \cn{case x in a) ;; *) ;; esac}; \cn{break}, \cn{continue}.\\
+\hd{Func:} \cn{f()\{ local x=\$1; echo \$x; \}}; \cn{return} = exit 0--255.\\
+\hd{Special:} \cn{\$0} name, \cn{\$1..\$9} args, \cn{\$\#} count, \cn{"\$@"} all-quoted, \cn{\$\$} pid, \cn{\$!} bg pid, \cn{\$(cmd)} sub, \cn{\$((1+2))} arith, \cn{cmd \&} bg, \cn{jobs/fg/bg/wait}.\\
+\hd{Shebang:} \cn{\#!/bin/bash}. \hd{Debug:} \cn{bash -n} syntax, \cn{-x} trace, \cn{-v} raw; \cn{set -e} (\warn{suppressed in \&\& / ||}), \cn{set -u}, \cn{set -o pipefail}.\\
+\hd{Brace:} \cn{\{a,b,c\}}, \cn{\{1..5\}} (textual, before all expansions).\\
+\warn{Gotchas:} \cn{sort f > f} clobbers; useless \cn{cat}; single-quoted \cn{'\$VAR'} no expand; glob \cn{*} $\neq$ regex \cn{*}.
+\end{topic}
+
+% ------------------------------ REGEX ------------------------------------
+\begin{topic}{Regular Expressions}
+\hd{Classes:} \cn{[abc]}, \cn{[a-z]}, \cn{[\textasciicircum 0-9]} neg, \cn{.} any (not \cn{\textbackslash n}); \cn{\textbackslash d \textbackslash D \textbackslash w \textbackslash W \textbackslash s \textbackslash S}.\\
+\hd{Quant (greedy):} \cn{*}\,0+; \cn{+}\,1+; \cn{?}\,0--1; \cn{\{n\}}; \cn{\{n,m\}}. Add \cn{?} for lazy: \cn{*?  +?  \{n,m\}?}.\\
+\hd{Anchors:} \cn{\textasciicircum} start, \cn{\$} end, \cn{\textbackslash b} word-bnd, \cn{\textbackslash B} not. Zero-width.\\
+\hd{Groups:} \cn{(x)} capture, \cn{(?:x)} non-cap, \cn{(?<n>x)} named, \cn{(a|b)} alt, \cn{\textbackslash 1} backref.\\
+\hd{Lookaround (0-width):} \cn{(?=x)}, \cn{(?!x)}, \cn{(?<=x)}, \cn{(?<!x)}.\\
+\hd{Examples:} \cn{\textasciicircum [A-Za-z0-9]\{8,\}\$} alnum pwd $\ge$ 8; \cn{<.*?>} lazy tag.\\
+\hd{Glob $\neq$ Regex:} glob \cn{*}=any-str, \cn{?}=1-ch, \cn{[ab]}; regex \cn{*}=``0+ of prev''.\\
+\hd{Bash:} \cn{[[ \$s =\textasciitilde\ \textasciicircum [0-9]+\$ ]]}. Python: always raw \cn{r"\textbackslash d+"}.\\
+\warn{Pitfall:} \cn{.} skips \cn{\textbackslash n} unless DOTALL/s flag; greedy by default; backref needs capturing group.
+\end{topic}
+
+% ------------------------------ PYTHON -----------------------------------
+\begin{topic}{Python}
+\hd{Typing:} dynamic + strong (no \cn{"5"+3}). Indent=scope (4sp). LEGB resolution; \cn{nonlocal}/\cn{global}.\\
+\hd{Ops:} \cn{/} float, \cn{//} floor, \cn{**} pow, \cn{\textasciicircum} XOR (!).\\
+\hd{Str:} f-str \cn{f"\{x:.2f\}"}; \cn{.strip .split .replace .startswith}; \cn{"".join(lst)}.\\
+\hd{Slice:} \cn{s[a:b:c]}, neg-idx, \cn{s[::-1]} reverse. Shallow copy.\\
+\hd{Coll:} list \cn{[]}, tuple \cn{()}, set \cn{\{x\}}, dict \cn{\{k:v\}}; \cn{d.get(k,def)}, \cn{d.items()}. Comp \cn{[x*x for x in r if x>0]}; generator \cn{(...)} lazy.\\
+\hd{Iter:} \cn{for x in xs}, \cn{enumerate}, \cn{zip}, \cn{range(a,b,c)}.\\
+\hd{Func:} \cn{def f(a,b=1,*args,**kw)->int:}. Doc \cn{"""..."""}. \warn{Trap:} mutable default \cn{def f(x=[])}; use \cn{None}.\\
+\hd{OOP:} \cn{class C:}, \cn{def \_\_init\_\_(self):}, \cn{\_\_str\_\_}, \cn{\_priv} convention. Duck typing.\\
+\hd{Exc (EAFP):} \cn{try: ... except KeyError: ...}. Never bare \cn{except:}. Common: \cn{Value/Type/Index/Key/FileNotFound/ZeroDiv/Attribute}.\\
+\hd{I/O:} \cn{with open(f) as fh: for line in fh: ...} (auto-close).\\
+\hd{CLI:} \cn{sys.argv}; \cn{print(...,file=sys.stderr)}; \cn{sys.exit(1)}; \cn{argparse}.\\
+\hd{Regex:} \cn{re.search/findall/sub}; \cn{m.group(n|name)}; raw \cn{r"..."}.\\
+\hd{Truthy:} \cn{if not items:} empty. Use \cn{is None}, never \cn{==None}. \cn{None/0/""/[]/\{\}} falsy.\\
+\hd{Style:} snake\_case, PascalCase, UPPER\_CONST (PEP 8).
+\end{topic}
+
+% ------------------------------ JS / NODE --------------------------------
+\begin{topic}{JavaScript / Node.js}
+\hd{Decl:} \cn{let} (block, reassign), \cn{const} (block, no reassign), \warn{never var}.\\
+\hd{Eq:} \cn{===} strict no coerce; \cn{==} coerces (\cn{0==false}!). Use \cn{===}/\cn{!==}.\\
+\hd{Nothings:} \cn{undefined} = uninit, \cn{null} = intentional. Optional \cn{?.}, nullish \cn{??}.\\
+\hd{Event loop:} 1-thread + non-blocking I/O. Call stack $\to$ task queue $\to$ event loop. \cn{setTimeout(f,0)} = after stack empty. \warn{Block main = freeze app.}\\
+\hd{Async:} callback $\to$ Promise $\to$ \cn{async/await}. \cn{await} only inside \cn{async}; wrap \cn{try/catch}. \warn{Trap:} \cn{arr.forEach(async f)} ignores promises; use \cn{for...of} (seq) or \cn{Promise.all(arr.map(...))} (par).\\
+\hd{Arrow:} \cn{(a,b)=>a+b}; lexical \cn{this}.\\
+\hd{Destr:} \cn{const \{a,b\}=o}, \cn{const [x,y]=arr}, default \cn{\{a=1\}}, rest \cn{...rest}, spread \cn{\{...o,b:2\}}.\\
+\hd{Arrays:} \cn{.map .filter .reduce .find .some .every .includes}.\\
+\hd{Tmpl:} \cn{`hi \$\{name\}`}.\\
+\hd{Node:} \cn{require('m')} / ESM \cn{import}; \cn{fs.readFile(p,cb)} async vs \cn{readFileSync} blocks.\\
+\hd{Express:} \cn{app.get('/u/:id',(req,res)=>res.json(...))}; \cn{req.params/query/body}.\\
+\hd{NPM:} \cn{npm init}, \cn{install pkg}, \cn{install -D}, \cn{run script}.\\
+\hd{Hoist:} \cn{var}+funcs hoisted; \cn{let/const} in TDZ until decl.
+\end{topic}
+
+% ------------------------------ REACT ------------------------------------
+\begin{topic}{React}
+\hd{Paradigm:} declarative; \cn{UI = f(state)}; re-render on state change.\\
+\hd{Components:} capitalized func returning JSX; props read-only.\\
+\hd{JSX:} \cn{className} (not class), \cn{htmlFor}, \cn{onClick} camel; self-close \cn{<br/>}; inline \cn{style=\{\{color:'red'\}\}}; fragment \cn{<>...</>}; expr \cn{\{x\}}.\\
+\hd{useState:} \cn{const [v,setV]=useState(0)}. Functional \cn{setV(p=>p+1)} avoids stale closures. Batched in React 18+.\\
+\hd{useEffect:} \cn{useEffect(fn,[deps])}; \cn{[]}=mount only; return cleanup func; StrictMode runs 2$\times$ in dev.\\
+\hd{Lists:} \cn{\{xs.map(x=><li key=\{x.id\}>\{x.n\}</li>)\}}. \warn{Stable keys, never index for dynamic.}\\
+\hd{Cond:} \cn{\{ok \&\& <X/>\}}, \cn{\{ok ? <A/> : <B/>\}}. \warn{Trap:} \cn{\{count \&\& ...\}} renders \cn{0}.\\
+\hd{Forms (controlled):} \cn{<input value=\{v\} onChange=\{e=>setV(e.target.value)\}/>}.\\
+\hd{Lift state up:} common ancestor holds state; pass props down + callback up.\\
+\hd{Composition:} \cn{children} prop; prefer composition over inheritance.\\
+\hd{VDOM:} diff old vs new tree $\to$ patch real DOM.\\
+\hd{Hook rules:} top-level only (no if/loop/func); only in components or custom hooks.\\
+\hd{Thinking-in-React:} 1\,hierarchy~2\,static~3\,min state~4\,owner~5\,inverse flow.
+\end{topic}
+
+% ------------------------------ C ----------------------------------------
+\begin{topic}{C Programming}
+\hd{No:} classes, overloading, refs, exceptions, GC. Manual memory.\\
+\hd{Mem:} \cn{malloc(n)}$\to$ptr or NULL; \cn{calloc}, \cn{realloc}; \cn{free(p); p=NULL;}. Failure modes: leak, use-after-free, double-free, segfault.\\
+\hd{Ptrs:} \cn{int *p}; \cn{\&x} addr; \cn{*p} deref; \cn{p->f} = \cn{(*p).f}. Arrays decay to pointer in args.\\
+\hd{Strings:} char arr ending \cn{'\textbackslash 0'} (0, not \cn{'0'}=48); \cn{strlen/strcpy/strcmp/strncpy}. Buffer overflow if no terminator.\\
+\hd{const:} \cn{const char *s} = read-only view; casting away const = UB.\\
+\hd{Structs:} \cn{struct P\{int x;\};}, \cn{typedef struct\{...\}P;}. Fixed-size before variable.\\
+\hd{Errors:} return 0=ok, nonzero=err; output via pointer arg; \cn{errno} global, check after libc.\\
+\hd{File I/O:} \cn{FILE*f=fopen(p,"r");} check NULL; \cn{fread/fwrite/fgets/fprintf}; \cn{fclose} on every path.\\
+\hd{Build:} \cn{.c} $\to$ preprocess $\to$ compile $\to$ \cn{.o} $\to$ link $\to$ exe. Static link = fat self-contained; dynamic = \cn{.so/.dll} loaded at runtime.\\
+\hd{libc:} portability layer; same API, different impl per OS.\\
+\hd{Cleanup label:} single \cn{goto cleanup;} at fn end to release resources on error paths.\\
+\hd{Headers:} \cn{<stdio.h>} sys, \cn{"my.h"} local; guard \cn{\#ifndef X \#define X ... \#endif}.
+\end{topic}
+
+% ------------------------------ JAVA -------------------------------------
+\begin{topic}{Java}
+\hd{Entry:} \cn{public static void main(String[] args)}.\\
+\hd{Primitives} (stack): byte/short/int/long/float/double/char/boolean. \hd{Wrappers} (heap): Integer, Double, ... required for generics \cn{List<Integer>}.\\
+\hd{Autobox:} int$\leftrightarrow$Integer auto. \warn{Unbox null $\to$ NPE.} Integer cache [-128,127] makes \cn{==} ``work'' then fail at 128.\\
+\hd{== vs equals:} \cn{==} = identity for objects; use \cn{.equals()}. Strings interned for literals.\\
+\hd{Access:} \cn{public}, \cn{protected} (pkg+sub), \emph{(default)} = package-private, \cn{private}.\\
+\hd{Inherit:} single class; multi-interface; \cn{extends}+\cn{implements}; methods virtual by default; \cn{super(...)} first in ctor.\\
+\hd{abstract} class = state+behavior; \hd{interface} = behavior only (default methods OK Java 8+).\\
+\hd{Generics:} type erasure $\Rightarrow$ \cn{List<S>} and \cn{List<I>} same at runtime; no \cn{new T()}; no \cn{instanceof List<S>}. Bounded \cn{<T extends Comparable<T>>}; wildcards \cn{? extends T} (read), \cn{? super T} (write).\\
+\hd{Coll:} declare to iface: \cn{List<S> xs=new ArrayList<>();}. \cn{ArrayList, LinkedList, HashSet, TreeSet, HashMap, TreeMap}.\\
+\hd{Exc:} Checked (catch or declare) vs Unchecked (Runtime/NPE/CCE). \cn{try/catch/finally}, \cn{try-with-resources} autoclose.\\
+\hd{Equals contract:} override \cn{equals} + \cn{hashCode} together.
+\end{topic}
+
+% ------------------------------ GIT --------------------------------------
+\begin{topic}{Git}
+\hd{Trees:} Working $\leftrightarrow$ Index/Stage $\leftrightarrow$ Repo. HEAD = current commit.\\
+\hd{Setup:} \cn{git init}, \cn{clone URL}, \cn{config --global user.name/email}; \cn{.gitignore} (\cn{*.pyc}, \cn{!keep.log} negate).\\
+\hd{Commit:} \cn{add f}, \cn{add -A}, \cn{commit -m}, \cn{commit -am} (tracked only); \cn{diff}, \cn{diff --staged}, \cn{diff HEAD}. Msg: 50/72; imperative (``Add'' not ``Added'').\\
+\hd{Inspect:} \cn{status}, \cn{log}, \cn{log a..b}, \cn{show C}, \cn{blame f}, \cn{reflog} (saves lost commits).\\
+\hd{Undo:} \cn{restore f} (discard WT), \cn{restore --staged f} (unstage), \cn{stash}/\cn{stash pop}, \cn{clean -fd} (untracked).\\
+\hd{Branch:} \cn{branch}, \cn{switch -c name}, \cn{branch -d}, \cn{branch -D} force.\\
+\hd{Merge/Rebase:} \cn{merge B} (2-parent commit) vs \cn{rebase B} (linear, \warn{rewrites}); \cn{merge --squash}. Conflicts marked \cn{<<<<<<< HEAD ====== >>>>>>> B}; edit, add, commit.\\
+\hd{Remote:} \cn{push -u origin b}, \cn{fetch}, \cn{pull}, \cn{pull --rebase}, \cn{remote -v}.\\
+\warn{Rewriting (local only):} \cn{commit --amend}; \cn{reset --soft/--mixed/--hard HEAD\textasciitilde 1}; \cn{rebase -i HEAD\textasciitilde 3}.\\
+\ok{Safe undo on shared:} \cn{revert C} (inverse commit).\\
+\hd{Tags:} \cn{tag v1} (light) vs \cn{tag -a v1 -m} (annotated); \cn{push --tags}.\\
+\warn{Golden rule:} never rewrite pushed history; \cn{--force-with-lease} safer than \cn{--force}.\\
+\hd{Detached HEAD:} \cn{switch -c new} to save commits.
+\end{topic}
+
+% ------------------------------ MAKE -------------------------------------
+\begin{topic}{Make \& Makefiles}
+\hd{Target : prereqs} then \warn{TAB}-indented recipe (NOT spaces).\\
+\hd{Build:} DAG of targets; rebuild if any prereq newer than target (mtime).\\
+\hd{Auto vars:} \cn{\$@} target, \cn{\$<} 1st prereq, \cn{\$\textasciicircum} all prereqs, \cn{\$?} newer-than-target, \cn{\$*} stem.\\
+\hd{Pattern rule:}\\
+\cn{\%.o: \%.c}\\
+\cn{\hspace*{1em}\$(CC) \$(CFLAGS) -c \$< -o \$@}\\
+\hd{Vars:} \cn{=} lazy, \cn{:=} immediate, \cn{?=} if-unset, \cn{+=} append; subst \cn{\$(SRCS:.c=.o)}. Functions: \cn{\$(wildcard *.c)}, \cn{\$(patsubst \%.c,\%.o,\$(S))}, \cn{\$(filter \%.c,\$(F))}, \cn{\$(foreach v,l,t)}, \cn{\$(shell cmd)}.\\
+\hd{Phony:} \cn{.PHONY: clean test all} $\to$ action, always run.\\
+\hd{Order-only:} \cn{tgt: req | dir} -- must exist, doesn't trigger rebuild.\\
+\hd{Cond:} \cn{ifeq/ifdef/ifneq ... endif}.\\
+\hd{Flags:} \cn{make -n} dry-run, \cn{-j N} parallel, \cn{-B} force, \cn{-d} debug, \cn{-p} print db, \cn{VAR=v} override.\\
+First non-special rule = default goal. Each recipe line = separate shell (chain with \cn{;\textbackslash} or \cn{\&\&}).\\
+\hd{Special:} \cn{.DEFAULT\_GOAL}, \cn{.PRECIOUS}, \cn{-include f} (ignore missing).
+\end{topic}
+
+% ----------------------------- TESTING -----------------------------------
+\begin{topic}{Testing / TDD / Refactor}
+\hd{Levels:} Unit (one unit, isolated) $\to$ Integration $\to$ E2E. Pyramid: many unit, few E2E.\\
+\hd{TDD cycle:} \warn{Red} $\to$ \ok{Green} $\to$ \textbf{Refactor}. Uncle Bob's 3 rules: no prod w/o failing test; just-enough test to fail; just-enough code to pass.\\
+\hd{V\&V:} Verification = ``built right?'' (auto); Validation = ``right thing?'' (manual/customer).\\
+\hd{Doubles:} Dummy (passed, unused), Stub (canned reply), Spy (record), Mock (verify expectations), Fake (light impl).\\
+\hd{pytest:} files \cn{test\_*.py}, funcs \cn{test\_*}, \cn{assert x==y}; \cn{@pytest.fixture} (setup/yield/teardown).\\
+\hd{Gherkin:} Given/When/Then. Playwright: \cn{page.goto/getByRole/expect}.\\
+\hd{Coverage:} line, branch, path. 100\% $\neq$ bug-free.\\
+\hd{Test behavior} not implementation; survives refactor.\\
+\hd{Refactoring:} change structure, preserve behavior. \hd{Smells:} long fn, dup code, big class, long param list, switch-on-type, feature envy, data clumps, magic numbers, \warn{dead code}.\\
+\hd{Catalog:} Extract Method/Class, Rename, Move Method, Replace Conditional w/ Polymorphism, Introduce Parameter Object.\\
+\warn{Failures:} Knight Capital (dead code), Ariane 5 (16-bit overflow reuse), Therac-25 (race).\\
+\hd{Regression test:} test for the bug; keep forever.
+\end{topic}
+
+% ----------------------------- DEBUGGING ---------------------------------
+\begin{topic}{Debugging}
+\hd{Vocab:} \textbf{Fault} = bad code; \textbf{Error} = bad runtime state; \textbf{Failure} = visible bad behavior. Flow: Fault $\to$ Error $\to$ Failure.\\
+\hd{4 steps:} 1\,Reproduce 2\,Locate fault 3\,Root cause 4\,Fix + verify (+ regression test).\\
+\hd{Methods:} Rubber duck (explain line-by-line); print/log; scientific (hypothesize, test); bisect (\cn{git bisect}); delta debug.\\
+\hd{Logging:} DEBUG, INFO, WARNING, ERROR, CRITICAL. Don't log secrets.\\
+\hd{Assertions} document \& enforce invariants near suspicious code.\\
+\hd{VS Code:} breakpoints (cond/log), step over/into/out, Locals/Watch/Call stack/Debug console; \cn{launch.json} args.\\
+\hd{gdb:} \cn{b file:N}, \cn{r args}, \cn{n/s/c}, \cn{p var}, \cn{bt}, \cn{watch}, \cn{info locals}.\\
+\hd{Curse of knowledge:} you read what you intended, not what's there.\\
+\hd{First instinct:} search the error (strip identifiers first), then ask coworker.\\
+\warn{Anti:} bare \cn{except:} swallows; ``works on my machine''; temp \cn{print} committed.
+\end{topic}
+
+\end{multicols*}
+
+\newpage
+
+% ========================== PAGE 2 (BACK) ================================
+\begin{multicols*}{3}
+
+% ---------------------------- SECURITY -----------------------------------
+\begin{topic}{Security \& Authentication}
+\hd{CIA triad:} Confidentiality, Integrity, Availability.\\
+\hd{AuthN $\neq$ AuthZ:} who you are vs what you may do.\\
+\hd{Principles:} Least Privilege; Zero Trust (sanitize all input); Defense in Depth; Open Design (no security by obscurity); Fail Securely; Trust Boundary.\\
+\hd{Threat model:} who? what? resources? incentive? Plan = Security model + Threat model + Attack surface + Protections.\\
+\hd{Common attacks:}\\
+$\cdot$ \warn{SQLi}: \cn{' OR ''=''}. \ok{Fix}: parameterized queries (\cn{?}, \cn{@1}); never concatenate.\\
+$\cdot$ \warn{XSS}: inject \cn{<script>} into trusted page. \ok{Fix}: escape output, CSP, HttpOnly cookies.\\
+$\cdot$ \warn{CSRF}: ride logged-in session. \ok{Fix}: CSRF tokens, SameSite cookies.\\
+$\cdot$ Path traversal \cn{../}; command injection; RCE; SSRF; DoS.\\
+\hd{Crypto:} \textbf{Sym} AES (same key); \textbf{Asym/PK} RSA/ECC (pub encrypt, priv decrypt); \textbf{Hash} SHA-256 (1-way); \textbf{Sign}: priv signs hash, pub verifies. \textbf{Salt} pw + slow hash (bcrypt/scrypt/argon2).\\
+\hd{HTTPS} = HTTP + TLS. TLS handshake: CA-signed cert, key exchange, symmetric session key.\\
+\hd{Auth:}\\
+$\cdot$ \textbf{Session cookies}: server holds session ID; HttpOnly + Secure + SameSite.\\
+$\cdot$ \textbf{JWT}: stateless; \cn{header.payload.signature} (base64url); store in HttpOnly cookie, \warn{not localStorage}.\\
+$\cdot$ \textbf{OAuth2}: delegated auth; \textbf{OIDC} = OAuth + identity layer.\\
+\hd{Passwords:} never plain or unsalted hash; bcrypt/argon2.\\
+\hd{OWASP Top:} broken access ctrl, crypto failures, injection, insecure design, misconfig, vulnerable deps, auth fail, SSRF.
+\end{topic}
+
+% ---------------------------- NETWORKING ---------------------------------
+\begin{topic}{Networking / Client-Server}
+\hd{Architecture:} Client-Server (centralized) vs P2P (decentralized; producer+consumer). Hybrid e.g.\ Zoom.\\
+\hd{Throughput} = vol/time; \hd{Latency} = time/req. Scale: vertical vs horizontal.\\
+\hd{TCP/IP stack (top$\to$bot):} 1\,Application (HTTP/HTTPS/SSH/DNS/FTP/SMTP) 2\,Transport (TCP/UDP) 3\,Internet (IPv4/v6) 4\,Link (Ethernet/WiFi/MAC).\\
+\hd{TCP} reliable, ordered; 3-way handshake SYN $\to$ SYN-ACK $\to$ ACK; teardown FIN. \hd{UDP} fire-and-forget; streaming/games/DNS.\\
+\hd{IP:} v4 32-bit (4 octets), v6 128-bit; \cn{127.0.0.1} = localhost. Ports 0--65535; well-known <1024 (80, 443, 22, 25, 53).\\
+\hd{DNS} maps name $\to$ IP. \hd{HTTPS}=443, HTTP=80.\\
+\hd{HTTP:} stateless req/resp. Verbs:\\
+\begin{tabular}{@{}lll@{}}
+\textbf{Verb} & \textbf{Safe} & \textbf{Idemp.} \\
+GET / HEAD / OPTIONS & yes & yes\\
+PUT / DELETE & no & yes\\
+POST / PATCH & no & no\\
+\end{tabular}\\
+\hd{Status:} 1xx info; \textbf{2xx} 200/201/204; \textbf{3xx} 301/302/304; \textbf{4xx} 400/401/403/404/409/429; \textbf{5xx} 500/502/503/504.\\
+\hd{Headers:} Content-Type (application/json), Authorization, Cookie, CORS (Access-Control-Allow-Origin), Cache-Control.\\
+\hd{URL:} \cn{scheme://host:port/path?query\#frag}.\\
+\hd{WebSocket:} full-duplex over TCP after HTTP upgrade.\\
+\hd{CORS:} browser same-origin policy; server allows cross-origin via headers; preflight OPTIONS for non-simple requests.\\
+\hd{Inventors:} Kahn \& Cerf (Cerf @ UCLA).
+\end{topic}
+
+% ---------------------------- CLEAN CODE ---------------------------------
+\begin{topic}{Clean Code}
+\hd{4 Pillars:} Meaningful Naming, Simplified Structure, Purposeful Docs, Design by Contract.\\
+\hd{Naming:} wrong name $>$ meaningless $>$ vague $>$ precise short. Classes = nouns; methods = verbs. snake\_case Python, camelCase JS/Java/C++.\\
+\hd{Structure:} guard clauses (early exit); avoid deep nesting; short funcs (1 screen); 5--9 chunks (Miller).\\
+\hd{Comments:} \textbf{Why}, not \textbf{what}. Misleading $>$ outdated $>$ absent. Self-documenting names beat comments. Refactor before commenting.\\
+\hd{DbC:} pre-cond, post-cond, invariant. \cn{assert} enforces; \cn{-DNDEBUG} strips.\\
+\hd{Principles:} DRY, KISS, YAGNI, SoC, POLA (least astonishment), Law of Demeter (don't talk to strangers; \cn{a.b.c.d} smell), Boy Scout/Scout Rule (leave cleaner).\\
+\hd{SOLID:}\\
+$\cdot$ \textbf{S}RP: one reason to change.\\
+$\cdot$ \textbf{O}CP: open for extension, closed for modification.\\
+$\cdot$ \textbf{L}SP: subtypes substitutable.\\
+$\cdot$ \textbf{I}SP: small client-specific interfaces.\\
+$\cdot$ \textbf{D}IP: depend on abstractions.\\
+\hd{Stats:} Read\,:\,Write = 10\,:\,1 to 14\,:\,1; 58\% dev time = understanding.
+\end{topic}
+
+% ---------------------------- COMPLEXITY ---------------------------------
+\begin{topic}{Managing Complexity}
+\hd{Essential vs Accidental} complexity (Brooks, ``No Silver Bullet'').\\
+\hd{Big Ball of Mud:} low modifiability, low understandability, high fragility.\\
+\hd{Information Hiding (Parnas):} list likely-to-change decisions; each module hides one. Interface = stable WHAT; impl = changeable HOW.\\
+\hd{Deep vs Shallow modules (Ousterhout):} small iface hiding large functionality = GOOD; wide iface, thin impl = BAD.\\
+\hd{Coupling LOW $\cdot$ Cohesion HIGH.} Coupling: data $<$ stamp $<$ control $<$ common $<$ content. Cohesion: functional $>$ sequential $>$ communicational $>$ procedural $>$ temporal $>$ logical $>$ coincidental.\\
+\hd{Syntactic} dep (compiler catches) vs \hd{Semantic} (sneaky; same design decision).\\
+\hd{Single Choice / DRY:} only one module knows the full alternatives list.\\
+\hd{Change Impact:} if likely + costly $\to$ redesign.\\
+\hd{Design process:} identify reqs $\to$ generate many alternatives $\to$ evaluate $\to$ trade off $\to$ decide. Broaden in generate, narrow in evaluate.\\
+\hd{Delay decisions} until pressure forces them; solve simpler problem first.\\
+\hd{Design doc:} Context \& Scope $\cdot$ Goals/Non-Goals $\cdot$ Design $\cdot$ Alternatives.
+\end{topic}
+
+% --------------------------- COMPREHENSION -------------------------------
+\begin{topic}{Code Comprehension}
+\hd{Bottom-up} (novice): line-by-line chunking. \hd{Top-down} (expert): hypothesis-driven, scan for \textbf{beacons}.\\
+\hd{Cycle:} hypothesize $\to$ hunt beacons $\to$ verify/reject $\to$ revise; toggle modes opportunistically.\\
+\hd{5 Beacons:} identifier names, code structures (loop/recursion shape), tests, assertions, diagrams.\\
+\hd{Build domain knowledge} first (reqs/architecture).\\
+58\% of dev time = understanding code. Design modules usable without reading internals.
+\end{topic}
+
+% ---------------------------- CODE REVIEW --------------------------------
+\begin{topic}{Code Review}
+\hd{Expectation:} find bugs. \hd{Reality:} knowledge transfer, maintainability -- only $\sim$15\% defect comments (Bacchelli \& Bird).\\
+\hd{Top categories:} naming 22\%, organization 16\%, alt solutions 9\% $\to$ 50\% maintainability.\\
+\hd{Effective PRs:} 1--2 reviewers (more = bystander); 200--400 LOC; quality drops after 1\,hr; stack small PRs vs bundle.\\
+\hd{Purposes:} readability, teach juniors, norms, history, gatekeeping, accident prevention.\\
+\hd{Checklist:} 4 Pillars + correctness + tests + security + performance.\\
+\hd{Scout Rule:} leave cleaner; verify nothing hidden.\\
+New reviewers need 6--12 months to be productive.
+\end{topic}
+
+% --------------------------- DESIGN/UML ----------------------------------
+\begin{topic}{Design \& Modeling (UML)}
+\hd{4 views:} Module (Class diag) $\cdot$ Data (ERD) $\cdot$ Component-Connector (runtime) $\cdot$ Behavioral (Sequence/State).\\
+\hd{Class:} \cn{+} pub, \cn{-} priv, \cn{\#} prot. \textbf{Inheritance} = open white $\triangle$. \textbf{Assoc} = line (nav arrow). \textbf{Aggregation} = open $\diamond$ (has-a). \textbf{Composition} = filled $\blacklozenge$ (lifetime). \textbf{Multiplicity} 1, *, 0..1, 1..*.\\
+\hd{ERD:} rectangle = entity, $\diamond$ = relation, oval = attribute. Cardinality 1:1, 1:N, N:M.\\
+\hd{Sequence:} solid $\blacktriangleright$ sync call; dashed $\triangleright$ return; open $\blacktriangleright$ async. Activation bar = executing. Frames: \textbf{alt} (if/else), \textbf{opt}, \textbf{loop}, \textbf{par}.\\
+\hd{State:} rounded states + arrows \cn{[guard] event / action}; initial = $\bullet$.\\
+\hd{Has-a vs Is-a}: prefer composition over inheritance.
+\end{topic}
+
+% --------------------------- PATTERNS ------------------------------------
+\begin{topic}{Design Patterns (GoF)}
+\hd{Definition:} Context $\cdot$ Problem $\cdot$ Solution (roles) $\cdot$ Consequences. Pattern = template, not code.\\
+\hd{Creational:}\\
+$\cdot$ \textbf{Singleton} -- 1 instance globally accessible.\\
+$\cdot$ \textbf{Factory Method} -- subclass picks class to instantiate.\\
+$\cdot$ \textbf{Abstract Factory} -- families of related objects.\\
+$\cdot$ \textbf{Builder} -- step-by-step construct complex object.\\
+$\cdot$ \textbf{Prototype} -- clone existing object.\\
+\hd{Structural:}\\
+$\cdot$ \textbf{Adapter} -- translate one iface to another (XML$\leftrightarrow$JSON).\\
+$\cdot$ \textbf{Decorator} -- wrap to add behavior dynamically.\\
+$\cdot$ \textbf{Facade} -- simple iface over subsystem.\\
+$\cdot$ \textbf{Proxy} -- stand-in (lazy/access/remote).\\
+$\cdot$ \textbf{Composite} -- tree of part/whole uniformly.\\
+$\cdot$ \textbf{Bridge} -- decouple abstraction from impl.\\
+$\cdot$ \textbf{Flyweight} -- share many small objects.\\
+\hd{Behavioral:}\\
+$\cdot$ \textbf{Observer} -- 1 Subject:N Observers; auto \cn{update()} (GUI, signals).\\
+$\cdot$ \textbf{Publish-Subscribe} -- N:M via named topic + broker (async; generalizes Observer).\\
+$\cdot$ \textbf{Strategy} -- swap algo via composition; supports OCP.\\
+$\cdot$ \textbf{Command} -- action as object (undo, queue).\\
+$\cdot$ \textbf{Iterator} -- sequential access w/o exposing internals.\\
+$\cdot$ \textbf{State} -- change behavior when internal state changes.\\
+$\cdot$ \textbf{Template Method} -- skeleton in base, hooks in sub.\\
+$\cdot$ \textbf{Chain of Responsibility} -- pass req along handlers.\\
+$\cdot$ \textbf{Mediator} -- central coordinator (cut $N^2$ coupling).\\
+$\cdot$ \textbf{Visitor} -- operation across object structure.\\
+$\cdot$ \textbf{Memento} -- capture/restore state.
+\end{topic}
+
+% ---------------------------- REUSE --------------------------------------
+\begin{topic}{Design with Reuse}
+\hd{Why:} productivity, faster TTM, higher quality, fewer defects.\\
+\hd{Reality:} partial fit; glue code needed.\\
+\hd{Internal} (same org/product line) vs \hd{External} (COTS/OSS/framework).\\
+\hd{Library} = you call it. \hd{Framework} = it calls you (Inversion of Control: ``don't call us, we'll call you''). Framework = less flex, less code.\\
+\hd{White-box} reuse (inherit) vs \hd{Black-box} (compose).\\
+\hd{Dependency Injection:} pass collaborator in, don't \cn{new}; supports DIP + tests.\\
+\hd{External rules:} pin versions (Pipenv/lockfiles); update regularly for CVEs; minimize deps; fit-to-context $>$ popularity.\\
+\hd{Identify violated assumptions:} \warn{Ariane 5} reused 16-bit horizontal-velocity int $\to$ overflow $\to$ \$370M lost in 37s.\\
+\hd{Cost/benefit:} save impl + test vs integration + update + limited changeability.\\
+\hd{Generic-Specific:} parameterize, hooks, plugins.
+\end{topic}
+
+% ----------------------------- API ---------------------------------------
+\begin{topic}{API Design \& Interoperability}
+\hd{Interop} = exchange + use meaningfully. \hd{Syntactic} (format/types) vs \hd{Semantic} (units/vocab/side-effects).\\
+\warn{Mars Climate Orbiter} (\$193M): lbf vs N -- same syntax, different semantics.\\
+\hd{REST:} stateless; HTTP verbs as CRUD (POST/GET/PUT/DELETE); resource URLs \cn{/users/123}; JSON/XML.\\
+\hd{vs RPC} (stateful, action) $\cdot$ \hd{SOAP} (XML, complex, enterprise) $\cdot$ \hd{GraphQL} (schema, client picks fields).\\
+\hd{Idempotency:} same effect repeated. \hd{Safety:} no side effects.\\
+\hd{Versioning:} \cn{/v1/} in URL or header. Backward-compat adds OK; removals = major bump.\\
+\hd{Schema} (JSON/XML/YAML): types $\cdot$ values (min/max/enum) $\cdot$ structure (required). Enables auto validation.\\
+\hd{Serialization:} JSON (web), XML (enterprise/SOAP), YAML (config), Protobuf (binary, gRPC), CSV.\\
+\hd{Doc both views:} syntactic (params, fmt) + semantic (units, side-effects, errors, examples).\\
+\hd{Extensible iface:} add fields without breaking clients (ignore unknown).\\
+\hd{Adapter pattern} localizes translation.\\
+\hd{Trade-off:} richer iface = more flex but harder adoption.
+\end{topic}
+
+% ---------------------------- DATA ---------------------------------------
+\begin{topic}{Data Management}
+\hd{DBMS} handles concurrency, recovery, indexing, optimization. \hd{SQL} = declarative (WHAT not HOW).\\
+\hd{ERD $\to$ Relations:} entity $\to$ table, attr $\to$ column, relation $\to$ FK or junction table (M:N).\\
+\hd{Keys:} Primary (unique, NOT NULL); Foreign (refs PK, integrity); Composite; Surrogate.\\
+\hd{SQL skeleton:}\\
+\cn{SELECT c, COUNT(*) FROM t}\\
+\cn{ WHERE x>0 GROUP BY c}\\
+\cn{ HAVING COUNT(*)>1}\\
+\cn{ ORDER BY c DESC LIMIT 10;}\\
+\hd{Joins:} INNER (matching), LEFT/RIGHT (keep one, null other), FULL OUTER, CROSS (cartesian).\\
+\hd{Normalization:} 1NF (atomic), 2NF (no partial dep), 3NF (no transitive dep), BCNF.\\
+\hd{ACID} (RDBMS): Atomicity, Consistency, Isolation, Durability. \cn{BEGIN/COMMIT/ROLLBACK}.\\
+\hd{CAP (pick 2):} Consistency, Availability, Partition tolerance. RDBMS = CA; Cassandra = AP; MongoDB = CP.\\
+\hd{NoSQL:} Document (Mongo), Key-Value (Redis), Wide-Column (Cassandra), Graph (Neo4j). Eventual consistency; horizontal scale; flexible schema.\\
+\hd{Index} speeds reads, slows writes; B-tree default.\\
+\hd{SQLi defense:} parameterized queries always.
+\end{topic}
+
+% ---------------------------- GENAI --------------------------------------
+\begin{topic}{Coding with GenAI}
+\hd{LLMs:} pre-train (corpus) $\to$ post-train (RLHF) $\to$ inference (non-deterministic). ``Statistical parrots'' -- hallucinate APIs, repeat outdated/insecure code.\\
+\hd{Risks:} 40\% of Copilot suggestions have vulns; Cursor study: +30\% warnings, +42\% complexity; ``skill atrophy'' via cognitive offloading.\\
+\hd{Amplifier (DORA):} AI boosts high-perf teams (CI/tests/clean arch); magnifies dysfunction in struggling ones.\\
+\hd{Best practices:}\\
+$\cdot$ Mandatory review; treat AI as unreliable teammate.\\
+$\cdot$ Never commit code you can't explain.\\
+$\cdot$ AI = knowledgeable intern; YOU architect.\\
+$\cdot$ Pair: AI as driver/navigator.\\
+$\cdot$ TDD pairs well with AI (test = verification).\\
+\hd{Good use:} scaffolding, refactor, docs, simple debug, prototyping.\\
+\hd{Bad use:} business logic, security-critical, performance-critical, stateful complex flows. ``Vibe coding'' = hobby only.\\
+\hd{Prompt structure:} \textbf{Role} + \textbf{Task} + \textbf{Context} + \textbf{Instructions} + acceptance criteria. Split big tasks; replace-TODO pattern.\\
+\hd{Don't ask} ``should I use State pattern?'' $\to$ ask ``what are its trade-offs?''
+\end{topic}
+
+% ---------------------------- PEOPLE -------------------------------------
+\begin{topic}{People \& Processes}
+\hd{Paradigms:}\\
+$\cdot$ \textbf{Waterfall} (plan-driven): sequential phases; stable reqs, high cost of change.\\
+$\cdot$ \textbf{Agile/Scrum:} iterative sprints; embrace change.\\
+$\cdot$ \textbf{Risk-driven (Fairbanks):} upfront design $\propto$ risk.\\
+\hd{Agile Manifesto:} individuals, working sw, collab, response to change $>$ processes, docs, contracts, plan.\\
+\hd{Scrum:} Product Backlog $\to$ Sprint Planning $\to$ Sprint (2--3wk) $\to$ Daily Standup $\to$ Sprint Review $\to$ Retro. Roles: PO, Scrum Master, Dev Team. Planning poker = effort, not time.\\
+\hd{INVEST} stories: Independent, Negotiable, Valuable, Estimable, Small, Testable.\\
+\hd{Risk-driven:} identify hard-to-change decisions; risk storming; high cost change $\to$ more design; preserve changeability via Info Hiding/SOLID.\\
+\hd{Tech debt backlog:} dedicate sprint capacity; refactor + docs + perf.\\
+\hd{Decisions:} Rational (explicit, justifiable, slow) vs Intuitive (fast, expert, hard to justify). Biases: anchoring, confirmation, bounded rationality.\\
+\hd{Anti-patterns:} Ivory Tower architect; one-size-fits-all process.\\
+\hd{Scale:} Doghouse vs Skyscraper; right-size the process.\\
+\hd{Adversarial thinking:} how could this be abused?\\
+\hd{Archetypes:} Meta = fast/break; Google = design docs; NASA = plan-driven V\&V; Startup = lean MVP.
+\end{topic}
+
+% ---------------------------- CROSSREFS ----------------------------------
+\begin{topic}{Quick Cross-References}
+\hd{Idempotent verbs:} GET, PUT, DELETE, HEAD, OPTIONS. \emph{Not:} POST, PATCH.\\
+\hd{Safe verbs:} GET, HEAD, OPTIONS.\\
+\hd{Symbols overload:} \cn{\$@} = target (make) vs all args (bash); \cn{\$?} = newer-than-target (make) vs exit status (bash).\\
+\hd{Equality:} Py \cn{is None}, JS \cn{===}, Java \cn{.equals()}, C \cn{strcmp}, Bash \cn{=} (str) / \cn{-eq} (num).\\
+\hd{Acronym order:} Pillars = Naming-Structure-Docs-Contracts; CIA = Confid-Integ-Avail; CAP = Consist-Avail-Partition; ACID = A-C-I-D; SOLID = S-O-L-I-D; INVEST = I-N-V-E-S-T.\\
+\hd{Famous fails:} Mars Orbiter (units), Ariane 5 (int overflow reuse), Knight Capital (dead code), Therac-25 (race), Twitter onmouseover (XSS), BA 2018 (XSS, 250K cards).
+\end{topic}
+
+\end{multicols*}
+
+\end{document}

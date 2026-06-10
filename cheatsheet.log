@@ -1,0 +1,628 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.6.14)  10 JUN 2026 02:00
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**cheatsheet.tex
+(./cheatsheet.tex
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-05-26>
+(c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@subparagraph=\count280
+\c@figure=\count281
+\c@table=\count282
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count283
+\Gm@cntv=\count284
+\c@Gm@tempcnt=\count285
+\Gm@bindingoffset=\dimen149
+\Gm@wd@mp=\dimen150
+\Gm@odd@mp=\dimen151
+\Gm@even@mp=\dimen152
+\Gm@layoutwidth=\dimen153
+\Gm@layoutheight=\dimen154
+\Gm@layouthoffset=\dimen155
+\Gm@layoutvoffset=\dimen156
+\Gm@dimlist=\toks18
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2025/05/25 v2.0a multicolumn formatting (FMi)
+\c@tracingmulticols=\count286
+\mult@box=\box53
+\multicol@leftmargin=\dimen157
+\c@unbalance=\count287
+\c@collectmore=\count288
+\doublecol@number=\count289
+\multicoltolerance=\count290
+\multicolpretolerance=\count291
+\full@width=\dimen158
+\page@free=\dimen159
+\premulticols=\dimen160
+\postmulticols=\dimen161
+\multicolsep=\skip51
+\multicolbaselineskip=\skip52
+\partial@page=\box54
+\last@line=\box55
+\mc@boxedresult=\box56
+\maxbalancingoverflow=\dimen162
+\mult@rightbox=\box57
+\mult@grightbox=\box58
+\mult@firstbox=\box59
+\mult@gfirstbox=\box60
+\@tempa=\box61
+\@tempa=\box62
+\@tempa=\box63
+\@tempa=\box64
+\@tempa=\box65
+\@tempa=\box66
+\@tempa=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\c@minrows=\count292
+\c@columnbadness=\count293
+\c@finalcolumnbadness=\count294
+\last@try=\dimen163
+\multicolovershoot=\dimen164
+\multicolundershoot=\dimen165
+\mult@nat@firstbox=\box97
+\colbreak@box=\box98
+\mc@col@check@num=\count295
+\g__mc_curr_col_int=\count296
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2025/05/18 v2.17x AMS math features
+\@mathmargin=\skip53
+
+For additional information on amsmath, use the `?' option.
+(c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen166
+)) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen167
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count297
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count298
+\leftroot@=\count299
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count300
+\DOTSCASE@=\count301
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box99
+\strutbox@=\box100
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen168
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count302
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count303
+\dotsspace@=\muskip17
+\c@parentequation=\count304
+\dspbrk@lvl=\count305
+\tag@help=\toks20
+\row@=\count306
+\column@=\count307
+\maxfields@=\count308
+\andhelp@=\toks21
+\eqnshift@=\dimen169
+\alignsep@=\dimen170
+\tagshift@=\dimen171
+\tagwidth@=\dimen172
+\totwidth@=\dimen173
+\lineht@=\dimen174
+\@envbody=\toks22
+\multlinegap=\skip54
+\multlinetaggap=\skip55
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2949.
+LaTeX Info: Redefining \] on input line 2950.
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
+\col@sep=\dimen175
+\ar@mcellbox=\box101
+\extrarowheight=\dimen176
+\NC@list=\toks24
+\extratabsurround=\skip56
+\backup@length=\skip57
+\ar@cellbox=\box102
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+\TX@col@width=\dimen177
+\TX@old@table=\dimen178
+\TX@old@col=\dimen179
+\TX@target=\dimen180
+\TX@delta=\dimen181
+\TX@cols=\count309
+\TX@ftn=\toks25
+)
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 57.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2025-04-14 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count310
+) (./cheatsheet.aux)
+\openout1 = `cheatsheet.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(14.45377pt, 585.38747pt, 14.45377pt)
+* v-part:(T,H,B)=(14.45377pt, 766.06245pt, 14.45377pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=585.38747pt
+* \textheight=766.06245pt
+* \oddsidemargin=-57.81622pt
+* \evensidemargin=-57.81622pt
+* \topmargin=-94.81622pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=6.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 64.
+(c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Calculating math sizes for size <5.6> on input line 64.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 64.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 64.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 64.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 64.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5.6> on input line 64.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <3.91998> on input line 64.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <2.8> on input line 64.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 64.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 64.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 65.
+ (c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Underfull \hbox (badness 10000) in paragraph at lines 65--78
+[][]\T1/lmr/bx/n/5.6 Files:[] \T1/lmtt/m/n/9 ls -lacd ..pwdmkdir -pcp -rmvrm
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--78
+[]\T1/lmr/bx/n/5.6 Text:[] \T1/lmtt/m/n/9 catgrep PAT fsed 's/A/B/g'tr
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--78
+\T1/lmtt/m/n/9 a-z A-Z \T1/lmr/m/n/5.6 (stdin)\T1/lmtt/m/n/9 sort -nruuniq -c \T1/lmr/m/n/5.6 ([]\T1/lmr/bx/n/5.6 ad-ja-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--78
+\T1/lmr/bx/n/5.6 cent![]\T1/lmr/m/n/5.6 )\T1/lmtt/m/n/9 wc -lwccut -d: -f1awk '{print
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--78
+[]\T1/lmr/bx/n/5.6 Control:[] \T1/lmtt/m/n/9 for i in 1 2 3; do .. done\T1/lmr/m/n/5.6 ;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--78
+\T1/lmtt/m/n/9 for ((i=0;i<n;i++))\T1/lmr/m/n/5.6 ; \T1/lmtt/m/n/9 while [ ]; do ..
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--78
+\T1/lmtt/m/n/9 done\T1/lmr/m/n/5.6 ; \T1/lmtt/m/n/9 case x in a) ;; *) ;; esac\T1/lmr/m/n/5.6 ; \T1/lmtt/m/n/9 break\T1/lmr/m/n/5.6 ,
+ []
+
+
+Underfull \hbox (badness 6348) in paragraph at lines 82--91
+[]\T1/lmr/bx/n/5.6 Lookaround (0-width):[] \T1/lmtt/m/n/9 (?=x)\T1/lmr/m/n/5.6 , \T1/lmtt/m/n/9 (?!x)\T1/lmr/m/n/5.6 , \T1/lmtt/m/n/9 (?<=x)\T1/lmr/m/n/5.6 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--109
+[]\T1/lmr/bx/n/5.6 Coll:[] \T1/lmr/m/n/5.6 list \T1/lmtt/m/n/9 []\T1/lmr/m/n/5.6 , tu-ple \T1/lmtt/m/n/9 ()\T1/lmr/m/n/5.6 , set \T1/lmtt/m/n/9 {x}\T1/lmr/m/n/5.6 , dict \T1/lmtt/m/n/9 {k:v}\T1/lmr/m/n/5.6 ;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--109
+[]\T1/lmr/bx/n/5.6 Iter:[] \T1/lmtt/m/n/9 for x in xs\T1/lmr/m/n/5.6 , \T1/lmtt/m/n/9 enumerate\T1/lmr/m/n/5.6 , \T1/lmtt/m/n/9 zip\T1/lmr/m/n/5.6 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--109
+[]\T1/lmr/bx/n/5.6 Exc (EAFP):[] \T1/lmtt/m/n/9 try: ... except KeyError:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--109
+\T1/lmtt/m/n/9 ...\T1/lmr/m/n/5.6 . Never bare \T1/lmtt/m/n/9 except:\T1/lmr/m/n/5.6 . Com-mon:
+ []
+
+
+Overfull \hbox (51.81564pt too wide) in paragraph at lines 95--109
+\T1/lmtt/m/n/9 Value/Type/Index/Key/FileNotFound/ZeroDiv/Attribute\T1/lmr/m/n/5.6 . 
+ []
+
+
+Overfull \hbox (10.44704pt too wide) in paragraph at lines 95--109
+[]\T1/lmr/bx/n/5.6 Regex:[] \T1/lmtt/m/n/9 re.search/findall/sub\T1/lmr/m/n/5.6 ; \T1/lmtt/m/n/9 m.group(n|name)\T1/lmr/m/n/5.6 ;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--126
+[]\T1/lmr/bx/n/5.6 Async:[] \T1/lmr/m/n/5.6 call-back $\OMS/lmsy/m/n/5.6 !$ \T1/lmr/m/n/5.6 Promise $\OMS/lmsy/m/n/5.6 !$ \T1/lmtt/m/n/9 async/await\T1/lmr/m/n/5.6 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--126
+\T1/lmtt/m/n/9 arr.forEach(async f) \T1/lmr/m/n/5.6 ig-nores promises; use
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--126
+[]\T1/lmr/bx/n/5.6 Arrays:[] \T1/lmtt/m/n/9 .map .filter .reduce .find .some
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--126
+[]\T1/lmr/bx/n/5.6 Node:[] \T1/lmtt/m/n/9 require('m') \T1/lmr/m/n/5.6 / ESM \T1/lmtt/m/n/9 import\T1/lmr/m/n/5.6 ;
+ []
+
+
+Overfull \hbox (40.54741pt too wide) in paragraph at lines 113--126
+[]\T1/lmr/bx/n/5.6 Express:[] \T1/lmtt/m/n/9 app.get('/u/:id',(req,res)=>res.json(...))\T1/lmr/m/n/5.6 ;
+ []
+
+
+Underfull \hbox (badness 5288) in paragraph at lines 130--143
+\T1/lmr/m/n/5.6 self-close \T1/lmtt/m/n/9 <br/>\T1/lmr/m/n/5.6 ; in-line \T1/lmtt/m/n/9 style={{color:'red'}}\T1/lmr/m/n/5.6 ;
+ []
+
+
+Overfull \hbox (11.32898pt too wide) in paragraph at lines 130--143
+[]\T1/lmr/bx/n/5.6 Lists:[] \T1/lmtt/m/n/9 {xs.map(x=><li key={x.id}>{x.n}</li>)}\T1/lmr/m/n/5.6 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--143
+[]\T1/lmr/bx/n/5.6 Forms (con-trolled):[] \T1/lmtt/m/n/9 <input value={v}
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--143
+[]\T1/lmr/bx/n/5.6 Thinking-in-React:[] \T1/lmr/m/n/5.6 1hierarchy 2static 3min
+ []
+
+
+Underfull \hbox (badness 7944) in paragraph at lines 147--159
+[]\T1/lmr/bx/n/5.6 Strings:[] \T1/lmr/m/n/5.6 char arr end-ing \T1/lmtt/m/n/9 '\0' \T1/lmr/m/n/5.6 (0, not \T1/lmtt/m/n/9 '0'\T1/lmr/m/n/5.6 =48);
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--159
+[]\T1/lmr/bx/n/5.6 Structs:[] \T1/lmtt/m/n/9 struct P{int x;};\T1/lmr/m/n/5.6 , \T1/lmtt/m/n/9 typedef
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--159
+[]\T1/lmr/bx/n/5.6 File I/O:[] \T1/lmtt/m/n/9 FILE*f=fopen(p,"r"); \T1/lmr/m/n/5.6 check NULL;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--174
+[][]\T1/lmr/bx/n/5.6 Entry:[] \T1/lmtt/m/n/9 public static void main(String[]
+ []
+
+
+Overfull \hbox (15.27907pt too wide) in paragraph at lines 163--174
+[]\T1/lmr/bx/n/5.6 Primitives[] \T1/lmr/m/n/5.6 (stack): byte/short/int/long/float/double/char/boolean.
+ []
+
+
+Overfull \hbox (8.73737pt too wide) in paragraph at lines 163--174
+[]\T1/lmr/bx/n/5.6 Inherit:[] \T1/lmr/m/n/5.6 sin-gle class; multi-interface; \T1/lmtt/m/n/9 extends\T1/lmr/m/n/5.6 +\T1/lmtt/m/n/9 implements\T1/lmr/m/n/5.6 ;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--174
+[]\T1/lmr/bx/n/5.6 Coll:[] \T1/lmr/m/n/5.6 de-clare to iface: \T1/lmtt/m/n/9 List<S> xs=new
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--174
+\T1/lmtt/m/n/9 ArrayList<>();\T1/lmr/m/n/5.6 . \T1/lmtt/m/n/9 ArrayList, LinkedList,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--174
+[]\T1/lmr/bx/n/5.6 Exc:[] \T1/lmr/m/n/5.6 Checked (catch or de-clare) vs Unchecked
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--174
+\T1/lmr/m/n/5.6 (Run-time/NPE/CCE). \T1/lmtt/m/n/9 try/catch/finally\T1/lmr/m/n/5.6 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--191
+\T1/lmtt/m/n/9 user.name/email\T1/lmr/m/n/5.6 ; \T1/lmtt/m/n/9 .gitignore \T1/lmr/m/n/5.6 (\T1/lmtt/m/n/9 *.pyc\T1/lmr/m/n/5.6 ,
+ []
+
+
+Underfull \hbox (badness 6927) in paragraph at lines 178--191
+\T1/lmtt/m/n/9 f \T1/lmr/m/n/5.6 (un-stage), \T1/lmtt/m/n/9 stash\T1/lmr/m/n/5.6 /\T1/lmtt/m/n/9 stash pop\T1/lmr/m/n/5.6 , \T1/lmtt/m/n/9 clean -fd \T1/lmr/m/n/5.6 (un-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--191
+\T1/lmtt/m/n/9 --soft/--mixed/--hard HEAD~1\T1/lmr/m/n/5.6 ; \T1/lmtt/m/n/9 rebase -i
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--191
+[]\T1/lmr/bx/n/5.6 Golden rule:[] \T1/lmr/m/n/5.6 never rewrite pushed his-tory;
+ []
+
+
+Underfull \hbox (badness 5756) in paragraph at lines 195--208
+\T1/lmr/m/n/5.6 subst \T1/lmtt/m/n/9 $(SRCS:.c=.o)\T1/lmr/m/n/5.6 . Func-tions: \T1/lmtt/m/n/9 $(wildcard
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 195--208
+\T1/lmtt/m/n/9 *.c)\T1/lmr/m/n/5.6 , \T1/lmtt/m/n/9 $(patsubst %.c,%.o,$(S))\T1/lmr/m/n/5.6 , \T1/lmtt/m/n/9 $(filter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 212--224
+[]\T1/lmr/bx/n/5.6 Gherkin:[] \T1/lmr/m/n/5.6 Given/When/Then. Play-wright:
+ []
+
+
+
+
+
+
+
+
+
+[1
+
+{c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 249--266
+\OMS/lmsy/m/n/5.6 ^^A$ \T1/lmr/bx/n/5.6 JWT\T1/lmr/m/n/5.6 : state-less; \T1/lmtt/m/n/9 header.payload.signature
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--289
+[]\T1/lmr/bx/n/5.6 TCP/IP stack (top$\OMS/lmsy/m/n/5.6 !$\T1/lmr/bx/n/5.6 bot):[] \T1/lmr/m/n/5.6 1Application
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--289
+\T1/lmr/m/n/5.6 (HTTP/HTTPS/SSH/DNS/FTP/SMTP) 2Transport
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--289
+\T1/lmr/m/n/5.6 (TCP/UDP) 3Internet (IPv4/v6) 4Link (Eth-er-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 386--396
+[]\T1/lmr/bx/n/5.6 Internal[] \T1/lmr/m/n/5.6 (same org/product line) vs []\T1/lmr/bx/n/5.6 Ex-ter-nal[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 400--412
+[]\T1/lmr/bx/n/5.6 REST:[] \T1/lmr/m/n/5.6 state-less; HTTP verbs as CRUD
+ []
+
+
+
+
+
+
+
+
+
+[2{c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}] (./cheatsheet.aux)
+ ***********
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-05-26>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 3658 strings out of 469867
+ 54278 string characters out of 5482749
+ 526652 words of memory out of 5000000
+ 31922 multiletter control sequences out of 15000+600000
+ 659232 words of font info for 65 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 57i,6n,65p,325b,305s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx6.pfb><c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri7.pfb><c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb><c:/Users/samsa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam5.pfb>
+Output written on cheatsheet.pdf (2 pages, 214084 bytes).
+PDF statistics:
+ 63 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

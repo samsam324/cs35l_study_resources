@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CS35L Final Cheatsheet</title>
+<style>
+@page { size: letter; margin: 0.22in; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 6.6pt;
+  line-height: 1.18;
+  color: #000;
+}
+.page {
+  width: 8.06in;
+  height: 10.56in;
+  column-count: 3;
+  column-gap: 0.10in;
+  column-rule: 0.4pt solid #888;
+  page-break-after: always;
+  overflow: hidden;
+}
+.page:last-child { page-break-after: auto; }
+h1 {
+  font-size: 9pt;
+  margin: 0 0 2pt 0;
+  padding: 1pt 3pt;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.4pt;
+  break-after: avoid;
+}
+section {
+  break-inside: avoid;
+  margin: 0 0 2.5pt 0;
+  padding: 1.5pt 2pt;
+  border: 0.5pt solid #444;
+  border-radius: 1pt;
+}
+section.tight { padding: 1pt 2pt; }
+h2 {
+  font-size: 7pt;
+  margin: 0 0 1pt 0;
+  padding: 0;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.2pt;
+}
+h3 {
+  font-size: 6.6pt;
+  margin: 1.5pt 0 0.5pt 0;
+  padding: 0;
+  font-weight: bold;
+  color: #000;
+  border-bottom: 0.3pt solid #888;
+}
+p, ul, ol { margin: 0.3pt 0; padding: 0; }
+ul, ol { padding-left: 9pt; }
+li { margin: 0; padding: 0; }
+code, pre, kbd {
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 6.2pt;
+  background: #eee;
+  padding: 0 1pt;
+  border-radius: 1pt;
+}
+pre {
+  display: block;
+  background: #f0f0f0;
+  padding: 1pt 2pt;
+  margin: 1pt 0;
+  white-space: pre-wrap;
+  border-left: 1.5pt solid #555;
+  line-height: 1.15;
+}
+b, strong { font-weight: 700; }
+.warn { color: #900; font-weight: 700; }
+.ok { color: #060; font-weight: 700; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 6pt;
+  margin: 0.5pt 0;
+}
+th, td {
+  border: 0.3pt solid #666;
+  padding: 0.5pt 1.5pt;
+  text-align: left;
+  vertical-align: top;
+}
+th { background: #ddd; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 0 4pt; }
+.inline-list li { display: inline; }
+.inline-list li:not(:last-child)::after { content: " · "; }
+</style>
+</head>
+<body>
+
+<!-- =============================== PAGE 1 (FRONT) =============================== -->
+<div class="page">
+
+<!-- ============ SHELL ============ -->
+<section>
+<h2>Shell / Bash</h2>
+<b>Files:</b> <code>ls -la</code> <code>cd ..</code> <code>pwd</code> <code>mkdir -p</code> <code>cp -r</code> <code>mv</code> <code>rm -rf</code> <code>touch</code> <code>rmdir</code>(empty only).<br>
+<b>Text:</b> <code>cat</code> <code>grep PAT f</code> <code>sed 's/A/B/g'</code> <code>tr a-z A-Z</code>(stdin only) <code>sort -nru</code> <code>uniq -c</code>(adjacent!) <code>wc -lwc</code> <code>cut -d: -f1</code> <code>awk '{print $2}'</code> <code>head/tail -n N</code> <code>tail -f</code> <code>comm</code>(sorted).<br>
+<b>Perms:</b> <code>chmod +x</code>·<code>755</code>exec·<code>644</code>file·<code>600</code>secret. <code>which</code> <code>type -a</code> <code>export VAR=val</code> <code>source f</code>=<code>. f</code>.<br>
+<b>I/O:</b> <code>&gt;</code>overwrite·<code>&gt;&gt;</code>append·<code>2&gt;</code>err·<code>2&gt;&amp;1</code>err→out·<code>&lt;</code>stdin·<code>|</code>pipe·<code>&lt;&lt;EOF</code>heredoc·<code>&lt;&lt;&lt;</code>herestring·<code>&lt;(cmd)</code>proc-sub.<br>
+<b>Exit:</b> 0=ok·1=err·2=misuse·126=not exec·127=not found·130=Ctrl-C. <code>$?</code>=last exit.<br>
+<b>Vars:</b> no space round <code>=</code>. <code>"$VAR"</code> always quote. <code>${1:-def}</code>·<code>${1:=def}</code>(assign)·<code>${p##*/}</code>basename·<code>${f%.*}</code>noext·<code>${s/A/B}</code>·<code>${s//A/B}</code>all.<br>
+<b>Test <code>[ ]</code>:</b> <code>-f</code>file·<code>-d</code>dir·<code>-z</code>empty·<code>-eq -ne -lt -gt</code>int·<code>=</code> <code>!=</code>str·<code>!</code>not. Use <code>[[ ]]</code> in bash: no word-split, <code>&amp;&amp;</code> <code>||</code> <code>=~</code> regex.<br>
+<b>Loops:</b> <code>for i in 1 2 3; do .. done</code>·<code>for ((i=0;i&lt;n;i++))</code>·<code>while [ ]; do .. done</code>·<code>case x in a) ;; *) ;; esac</code>·<code>break</code>·<code>continue</code>.<br>
+<b>Func:</b> <code>f(){ local x=$1; echo $x; }</code>; <code>return</code> = exit code 0-255.<br>
+<b>Special:</b> <code>$0</code>name·<code>$1..$9</code>args·<code>$#</code>count·<code>"$@"</code>all-quoted·<code>$$</code>pid·<code>$!</code>bg pid.<br>
+<b>Sub:</b> <code>$(cmd)</code>·<code>$((1+2))</code>arith. <code>cmd &amp;</code>=bg·<code>jobs/fg/bg/wait</code>.<br>
+<b>Shebang:</b> <code>#!/bin/bash</code>. Debug: <code>bash -n</code>syntax·<code>-x</code>trace·<code>-v</code>raw·<code>set -e</code>(exit on err—but NOT in <code>&amp;&amp;/||</code> chains)·<code>set -u</code>unset err·<code>set -o pipefail</code>.<br>
+<b>Brace:</b> <code>{a,b,c}</code> <code>{1..5}</code> (textual, before expansion).<br>
+<b class="warn">GOTCHAS:</b> sort+&gt; same file clobbers·useless cat·single'$VAR' no expand·glob* ≠ regex*·tab indent NOT spaces (make).
+</section>
+
+<!-- ============ REGEX ============ -->
+<section>
+<h2>Regular Expressions</h2>
+<b>Classes:</b> <code>[abc]</code>·<code>[a-z]</code>·<code>[^0-9]</code>neg·<code>.</code>any(not \n)·<code>\d</code>=<code>[0-9]</code>·<code>\D</code>·<code>\w</code>=<code>[A-Za-z0-9_]</code>·<code>\W</code>·<code>\s</code>·<code>\S</code>.<br>
+<b>Quant (greedy):</b> <code>*</code>0+·<code>+</code>1+·<code>?</code>0-1·<code>{n}</code>·<code>{n,m}</code>. Lazy: add <code>?</code> → <code>*?</code> <code>+?</code> <code>{n,m}?</code>.<br>
+<b>Anchors:</b> <code>^</code>start·<code>$</code>end·<code>\b</code>word-bnd·<code>\B</code>not. Zero-width.<br>
+<b>Groups:</b> <code>(x)</code>capture·<code>(?:x)</code>non-cap·<code>(?&lt;n&gt;x)</code>·<code>(a|b)</code>·<code>\1</code> backref.<br>
+<b>Lookaround (zero-width):</b> <code>(?=x)</code>look-ahead·<code>(?!x)</code>neg·<code>(?&lt;=x)</code>look-behind·<code>(?&lt;!x)</code>.<br>
+<b>Examples:</b> <code>^[A-Za-z0-9]{8,}$</code>=alnum pwd≥8. <code>&lt;.*?&gt;</code> lazy tag.<br>
+<b>Glob ≠ Regex:</b> glob <code>*</code>=any-str, <code>?</code>=1-ch, <code>[ab]</code>. Regex <code>*</code>="0+ of prev".<br>
+<b>Bash:</b> <code>[[ $s =~ ^[0-9]+$ ]]</code>. Python: always raw strings <code>r"\d+"</code>.<br>
+<b class="warn">Pitfall:</b> <code>.</code> doesn't cross \n unless DOTALL/s. Greedy by default.
+</section>
+
+<!-- ============ PYTHON ============ -->
+<section>
+<h2>Python</h2>
+<b>Typing:</b> dynamic + strong. No <code>"5"+3</code>. Indent = scope (4 sp). LEGB name resolution. <code>nonlocal</code>/<code>global</code>.<br>
+<b>Ops:</b> <code>/</code>=float·<code>//</code>=floor·<code>**</code>=pow·<code>^</code>=XOR(!).<br>
+<b>Strings:</b> f-str <code>f"{x:.2f}"</code>·<code>.strip/.split/.replace/.startswith</code>·<code>"".join(list)</code>.<br>
+<b>Slicing:</b> <code>s[a:b:c]</code>, neg-idx, <code>s[::-1]</code> reverse. Shallow copy.<br>
+<b>Collections:</b> list <code>[]</code>·tuple <code>()</code>·set <code>{x}</code>·dict <code>{k:v}</code>·<code>d.get(k,def)</code>·<code>d.items()</code>. List comp <code>[x*x for x in r if x&gt;0]</code>. Generator <code>(...)</code> lazy.<br>
+<b>Iter:</b> <code>for x in xs</code>·<code>enumerate</code>·<code>zip</code>·<code>range(a,b,c)</code>.<br>
+<b>Func:</b> <code>def f(a,b=1,*args,**kw)-&gt;int:</code>. Docstring=<code>"""..."""</code>. Returns <code>None</code> implicit. <span class="warn">Trap:</span> mutable default <code>def f(x=[])</code>→use <code>None</code>.<br>
+<b>OOP:</b> <code>class C:</code>·<code>def __init__(self):</code>·<code>__str__</code>·<code>_priv</code>conv. Duck typing.<br>
+<b>Exc (EAFP):</b> <code>try: ... except KeyError: ...</code>. Never bare <code>except:</code>. Common: <code>Value/Type/Index/Key/FileNotFound/ZeroDiv/Attribute</code>.<br>
+<b>I/O:</b> <code>with open(f) as fh: for line in fh: ...</code> (auto-close).<br>
+<b>CLI:</b> <code>sys.argv</code>·<code>print(...,file=sys.stderr)</code>·<code>sys.exit(1)</code>·<code>argparse</code>.<br>
+<b>Regex:</b> <code>re.search/findall/sub</code>, <code>m.group(n|name)</code>. Use <code>r"..."</code>.<br>
+<b>Truthy:</b> <code>if not items:</code> empty. Use <code>is None</code> never <code>==None</code>. <code>None/0/""/[]/{}</code> falsy.<br>
+<b>Style:</b> snake_case·PascalCase·UPPER_CONST. PEP 8.
+</section>
+
+<!-- ============ JS / NODE ============ -->
+<section>
+<h2>JavaScript / Node.js</h2>
+<b>Types:</b> dynamic. <code>let</code>(block,reassign)·<code>const</code>(block,no reassign)·<span class="warn">never var</span>.<br>
+<b>Equality:</b> <code>===</code>strict (no coerce)·<code>==</code>coerces (<code>0==false</code>!). Use <code>===</code>/<code>!==</code>.<br>
+<b>Nothings:</b> <code>undefined</code>=uninit, <code>null</code>=intentional. Optional <code>?.</code>, nullish <code>??</code>.<br>
+<b>Event loop:</b> single-thread + non-blocking I/O. Call stack→Task queue→Event loop. <code>setTimeout(f,0)</code>=after stack empty. Blocking main = freezes app.<br>
+<b>Async:</b> callback→Promise→<code>async/await</code>. <code>await</code> only inside <code>async</code>. <code>try{await}catch(e){}</code>.<br>
+<pre>const r = await Promise.all(urls.map(fetch));</pre>
+<span class="warn">Trap:</span> <code>arr.forEach(async f)</code> ignores promises—use <code>for...of</code> (seq) or <code>Promise.all+map</code> (par).<br>
+<b>Arrow:</b> <code>(a,b)=&gt;a+b</code> lexical <code>this</code>. <code>this</code> in normal func depends on call site.<br>
+<b>Destructuring:</b> <code>const {a,b}=o</code>·<code>const [x,y]=arr</code>·default <code>{a=1}</code>·rest <code>...rest</code>·spread <code>{...o,b:2}</code>.<br>
+<b>Arrays:</b> <code>.map/.filter/.reduce/.find/.some/.every/.includes</code>.<br>
+<b>Templates:</b> <code>`hi ${name}`</code>.<br>
+<b>Node:</b> <code>require('m')</code> / ESM <code>import</code>. <code>fs.readFile(p,cb)</code> async vs <code>readFileSync</code> blocks.<br>
+<b>Express:</b> <code>app.get('/u/:id',(req,res)=&gt;res.json(...))</code>. <code>req.params/query/body</code>.<br>
+<b>NPM:</b> <code>npm init</code>·<code>install pkg</code>·<code>install -D</code>devDep·<code>run script</code>.<br>
+<b>Hoisting:</b> <code>var</code>+func decls hoisted; <code>let/const</code> in TDZ until decl.
+</section>
+
+<!-- ============ REACT ============ -->
+<section>
+<h2>React</h2>
+<b>Paradigm:</b> declarative; <code>UI = f(state)</code>. Re-render on state change.<br>
+<b>Components:</b> capitalized func returning JSX. Props read-only.<br>
+<b>JSX:</b> <code>className</code>(not class)·<code>htmlFor</code>·<code>onClick</code> camel·self-close <code>&lt;br/&gt;</code>·inline <code>style={{color:'red'}}</code>·multi-root <code>&lt;&gt;...&lt;/&gt;</code>·expr <code>{x}</code>.<br>
+<b>useState:</b> <code>const [v,setV]=useState(0)</code>. Functional update <code>setV(p=&gt;p+1)</code> avoids stale closures. Batched in React 18+.<br>
+<b>useEffect:</b> <code>useEffect(fn,[deps])</code>. <code>[]</code>=mount only. Return cleanup func. StrictMode runs 2× in dev.<br>
+<b>Lists:</b> <code>{xs.map(x=&gt;&lt;li key={x.id}&gt;{x.n}&lt;/li&gt;)}</code>. <span class="warn">Stable keys, never index for dynamic.</span><br>
+<b>Cond:</b> <code>{ok && &lt;X/&gt;}</code>·<code>{ok ? &lt;A/&gt; : &lt;B/&gt;}</code>. <span class="warn">Trap:</span> <code>{count && ...}</code> renders 0.<br>
+<b>Forms (controlled):</b> <code>&lt;input value={v} onChange={e=&gt;setV(e.target.value)}/&gt;</code>.<br>
+<b>Lift state up:</b> common ancestor holds; pass down + callback prop up.<br>
+<b>Composition:</b> <code>children</code> prop; prefer composition over inheritance.<br>
+<b>Virtual DOM:</b> diff old vs new tree → patch real DOM.<br>
+<b>Hook rules:</b> top-level only (no if/loop/func), only in components or custom hooks.<br>
+<b>Thinking-in-React:</b> 1 hierarchy 2 static 3 min state 4 owner 5 inverse flow.
+</section>
+
+<!-- ============ C ============ -->
+<section>
+<h2>C Programming</h2>
+<b>No:</b> classes·overload·refs·exceptions·GC. Manual memory.<br>
+<b>Mem:</b> <code>malloc(n)</code>→ptr or NULL·<code>calloc</code>·<code>realloc</code>·<code>free(p); p=NULL;</code>. Leak vs use-after-free vs double-free vs segfault.<br>
+<b>Ptrs:</b> <code>int *p</code>·<code>&amp;x</code>addr·<code>*p</code>deref·<code>p-&gt;f</code>=<code>(*p).f</code>. Arrays decay to ptr in args.<br>
+<b>Strings:</b> char arr ending <code>'\0'</code> (0, not '0'=48). <code>strlen/strcpy/strcmp/strncpy</code>. Buffer overflow if no terminator.<br>
+<b>const:</b> <code>const char *s</code>=read-only view. Casting away const = UB.<br>
+<b>Structs:</b> <code>struct P{int x;};</code>·<code>typedef struct{...}P;</code>. Fixed before var-length.<br>
+<b>Errors:</b> return 0=ok, nonzero=err. Output via ptr arg. <code>errno</code> global; check after libc call.<br>
+<b>File I/O:</b> <code>FILE*f=fopen(p,"r");</code> check NULL. <code>fread/fwrite/fgets/fprintf</code>. <code>fclose</code> on EVERY path.<br>
+<b>Build:</b> .c → preprocess → compile → .o → link → exe. Static link=fat binary, dynamic=<code>.so/.dll</code> at runtime.<br>
+<b>libc:</b> portability layer; same API, diff impl per OS (glibc/musl/MSVCRT).<br>
+<b>Cleanup label pattern:</b> single <code>goto cleanup;</code> at fn end to release resources on error paths.<br>
+<b>Headers:</b> <code>#include &lt;stdio.h&gt;</code> system·<code>"my.h"</code> local. Guard <code>#ifndef X #define X .. #endif</code>.
+</section>
+
+<!-- ============ JAVA ============ -->
+<section>
+<h2>Java</h2>
+<b>Entry:</b> <code>public static void main(String[] args)</code>.<br>
+<b>Primitives</b>(stack): byte/short/int/long/float/double/char/boolean. <b>Wrappers</b>(heap): Integer, Double… needed for generics <code>List&lt;Integer&gt;</code>.<br>
+<b>Autobox:</b> int↔Integer auto. <span class="warn">Unbox null→NPE.</span> Integer cache [-128,127] makes <code>==</code> "work" then fail at 128.<br>
+<b>== vs equals:</b> <code>==</code>=identity for objects; use <code>.equals()</code>. Strings interned for literals.<br>
+<b>Access:</b> <code>public</code>·<code>protected</code>(pkg+sub)·<i>(default)</i>=package-private·<code>private</code>.<br>
+<b>Inheritance:</b> single class; multi-interface. <code>extends</code>+<code>implements</code>. Methods virtual by default (no keyword). <code>super(...)</code> first in ctor.<br>
+<b>abstract</b> class: state+behavior. <b>interface</b>: behavior only (default methods OK Java 8+).<br>
+<b>Generics:</b> type erasure—<code>List&lt;S&gt;</code> &amp; <code>List&lt;I&gt;</code> same at runtime. No <code>new T()</code>. No <code>instanceof List&lt;S&gt;</code>. Bounded <code>&lt;T extends Comparable&lt;T&gt;&gt;</code>. Wildcards <code>? extends T</code> (read), <code>? super T</code> (write).<br>
+<b>Collections:</b> declare to iface: <code>List&lt;S&gt; xs=new ArrayList&lt;&gt;();</code>. <code>ArrayList/LinkedList/HashSet/TreeSet/HashMap/TreeMap</code>.<br>
+<b>Exceptions:</b> Checked (must catch/declare) vs Unchecked (Runtime/NPE/CCE). <code>try/catch/finally</code>·<code>try-with-resources</code> autoclose.<br>
+<b>Equals contract:</b> override <code>equals</code>+<code>hashCode</code> together.
+</section>
+
+<!-- ============ GIT ============ -->
+<section>
+<h2>Git</h2>
+<b>Trees:</b> Working ↔ Index/Stage ↔ Repo. HEAD=current commit.<br>
+<b>Setup:</b> <code>git init</code>·<code>clone URL</code>·<code>config --global user.name/email</code>·<code>.gitignore</code> (<code>*.pyc</code>, <code>!keep.log</code> negate).<br>
+<b>Commit:</b> <code>add f</code>·<code>add -A</code>·<code>commit -m</code>·<code>commit -am</code> (tracked only)·<code>diff</code>(wt vs idx)·<code>diff --staged</code>(idx vs HEAD)·<code>diff HEAD</code>(wt vs HEAD).<br>
+<b>Msg 50/72</b> · imperative ("Add" not "Added").<br>
+<b>Inspect:</b> <code>status</code>·<code>log</code>·<code>log a..b</code>·<code>show C</code>·<code>blame f</code>·<code>reflog</code>(saves lost commits).<br>
+<b>Undo:</b> <code>restore f</code>(discard wt)·<code>restore --staged f</code>(unstage)·<code>stash</code>/<code>stash pop</code>·<code>clean -fd</code>(untracked).<br>
+<b>Branch:</b> <code>branch</code>·<code>switch -c name</code>·<code>branch -d</code>·<code>branch -D</code> force.<br>
+<b>Merge/Rebase:</b> <code>merge B</code>(2-parent commit)·<code>rebase B</code>(linear, <span class="warn">rewrites</span>)·<code>merge --squash</code>. Conflicts <code>&lt;&lt;&lt;&lt;&lt; HEAD ===== &gt;&gt;&gt;&gt;&gt; B</code> then add+commit.<br>
+<b>Remote:</b> <code>push -u origin b</code>·<code>fetch</code>·<code>pull</code>·<code>pull --rebase</code>·<code>remote -v</code>.<br>
+<b class="warn">Rewriting (local only):</b> <code>commit --amend</code>·<code>reset --soft/--mixed/--hard HEAD~1</code>·<code>rebase -i HEAD~3</code>.<br>
+<b class="ok">Safe undo on shared:</b> <code>revert C</code> (inverse commit).<br>
+<b>Tags:</b> <code>tag v1</code>(light)·<code>tag -a v1 -m</code>(annotated)·<code>push --tags</code>.<br>
+<b class="warn">Golden rule:</b> never rewrite pushed history. <code>--force-with-lease</code> safer than <code>--force</code>.<br>
+<b>Detached HEAD:</b> <code>switch -c new</code> to save commits.
+</section>
+
+<!-- ============ MAKE ============ -->
+<section>
+<h2>Make &amp; Makefiles</h2>
+<b>Target : prereqs</b> then <span class="warn">TAB</span>-indented recipe (NOT spaces!).<br>
+<b>Build:</b> DAG of targets; rebuild if any prereq newer than target (mtime).<br>
+<b>Auto vars:</b> <code>$@</code>target·<code>$&lt;</code>1st prereq·<code>$^</code>all prereqs·<code>$?</code>newer-than-target·<code>$*</code>stem.<br>
+<b>Pattern rule:</b>
+<pre>%.o: %.c
+	$(CC) $(CFLAGS) -c $&lt; -o $@</pre>
+<b>Vars:</b> <code>=</code>lazy·<code>:=</code>immediate·<code>?=</code>if-unset·<code>+=</code>append. Subst <code>$(SRCS:.c=.o)</code>. Functions <code>$(wildcard *.c)</code>·<code>$(patsubst %.c,%.o,$(S))</code>·<code>$(filter %.c,$(F))</code>·<code>$(foreach v,l,t)</code>·<code>$(shell cmd)</code>.<br>
+<b>Phony:</b> <code>.PHONY: clean test all</code>→action, always run.<br>
+<b>Order-only:</b> <code>tgt: req | dir</code>—must exist, doesn't trigger rebuild.<br>
+<b>Conditionals:</b> <code>ifeq/ifdef/ifneq … endif</code>.<br>
+<b>Flags:</b> <code>make -n</code>dry-run·<code>-j N</code>parallel·<code>-B</code>force·<code>-d</code>debug·<code>-p</code>print db·<code>VAR=v</code> override.<br>
+<b>First non-special rule</b> = default goal. Each recipe line = separate shell (use <code>;\</code> or <code>&amp;&amp;</code> to chain).<br>
+<b>Special:</b> <code>.DEFAULT_GOAL</code>·<code>.PRECIOUS</code>·<code>-include f</code>(ignore missing).
+</section>
+
+<!-- ============ TESTING ============ -->
+<section>
+<h2>Testing / TDD / Refactor</h2>
+<b>Levels:</b> Unit (one unit, isolated) → Integration (units together) → E2E (full stack). Pyramid: many unit, few E2E.<br>
+<b>TDD cycle:</b> <span class="warn">Red</span>→<span class="ok">Green</span>→<b>Refactor</b>. Uncle Bob's 3: no prod w/o failing test, just enough test to fail, just enough code to pass.<br>
+<b>V&amp;V:</b> Verification="built right?" (automated). Validation="right thing?" (manual/customer).<br>
+<b>Doubles:</b> Dummy(passed not used)·Stub(canned reply)·Spy(record calls)·Mock(verify expectations)·Fake(working light impl).<br>
+<b>pytest:</b> files <code>test_*.py</code>, funcs <code>test_*</code>, <code>assert x==y</code>. <code>@pytest.fixture</code> setup/teardown (yield).<br>
+<b>Gherkin:</b> Given/When/Then. Playwright: <code>page.goto/getByRole/expect</code>.<br>
+<b>Coverage:</b> line, branch, path. 100% ≠ bug-free.<br>
+<b>Test behavior</b> not impl; survives refactor.<br>
+<b>Refactoring:</b> change structure w/o changing behavior. Smells: long fn, dup code, big class, long param list, switch-on-type, feature envy, data clumps, magic numbers, dead code.<br>
+<b>Catalog:</b> Extract Method/Class, Rename, Move Method, Replace Conditional with Polymorphism, Introduce Parameter Object.<br>
+<b class="warn">Famous fails:</b> Knight Capital (dead code), Ariane 5 (reused 16-bit overflow), Therac-25 (race).<br>
+<b>Regression test:</b> test for bug; keep forever.
+</section>
+
+<!-- ============ DEBUGGING ============ -->
+<section>
+<h2>Debugging</h2>
+<b>Vocab:</b> <b>Fault</b>=bad code · <b>Error</b>=bad runtime state · <b>Failure</b>=visible bad behavior. Flow Fault→Error→Failure.<br>
+<b>4 steps:</b> 1 Reproduce 2 Locate fault 3 Root cause 4 Fix + verify (+regression test).<br>
+<b>Methods:</b> Rubber duck (explain line-by-line)·print/log·scientific (hypothesize, test)·bisect (<code>git bisect</code>)·delta debug.<br>
+<b>Logging:</b> DEBUG·INFO·WARNING·ERROR·CRITICAL. Don't log secrets.<br>
+<b>Assertions:</b> document &amp; enforce invariants near suspicious code.<br>
+<b>VS Code:</b> breakpoints (cond/log)·step over/into/out·Locals/Watch/Call stack/Debug console·<code>launch.json</code> args.<br>
+<b>gdb:</b> <code>b file:N</code>·<code>r args</code>·<code>n/s/c</code>·<code>p var</code>·<code>bt</code>·<code>watch</code>·<code>info locals</code>.<br>
+<b>Curse of knowledge:</b> you read what you intended, not what's written.<br>
+<b>First instinct:</b> Google/AI the error (strip identifiers first).<br>
+<b class="warn">Anti-patterns:</b> bare <code>except:</code> swallows·"works on my machine"·temp <code>print</code> committed.
+</section>
+
+</div>
+
+<!-- =============================== PAGE 2 (BACK) =============================== -->
+<div class="page">
+
+<!-- ============ SECURITY ============ -->
+<section>
+<h2>Security &amp; Auth</h2>
+<b>CIA:</b> Confidentiality·Integrity·Availability.<br>
+<b>AuthN ≠ AuthZ:</b> who you are vs what you may do.<br>
+<b>Principles:</b> Least Privilege·Zero Trust (sanitize all input)·Defense in Depth·Open Design (no security by obscurity)·Fail Securely·Trust Boundary.<br>
+<b>Threat model:</b> who?·what?·resources?·incentive? Plan: Security model·Threat model·Attack surface·Protections.<br>
+<b>Common attacks:</b><br>
+• <b>SQLi</b>: <code>' OR ''=''</code>. <span class="ok">FIX</span>: parameterized queries <code>?</code>/<code>@1</code>; never concat.<br>
+• <b>XSS</b>: inject &lt;script&gt; into trusted page. <span class="ok">FIX</span>: escape output, CSP, HttpOnly cookies.<br>
+• <b>CSRF</b>: ride logged-in session. <span class="ok">FIX</span>: CSRF tokens, SameSite cookies.<br>
+• <b>Path traversal</b> <code>../</code>; <b>command injection</b>; <b>RCE</b>; <b>SSRF</b>; <b>DoS</b>.<br>
+<b>Crypto:</b> <b>Symmetric</b> AES (same key). <b>Asymm/PK</b> RSA/ECC (pub encrypt, priv decrypt). <b>Hash</b> SHA-256 (1-way). <b>Sign</b>: priv signs hash; pub verifies. <b>Salt</b> passwords + slow hash (bcrypt/scrypt/argon2).<br>
+<b>HTTPS</b>=HTTP+TLS. TLS handshake: cert (CA-signed), key exchange, symmetric session key.<br>
+<b>Auth schemes:</b><br>
+• <b>Session cookies</b>: server stores session ID; HttpOnly+Secure+SameSite.<br>
+• <b>JWT</b>: stateless; header.payload.signature (base64url). Store in HttpOnly cookie (XSS-safe) NOT localStorage.<br>
+• <b>OAuth2</b>: delegated auth (3rd-party login). <b>OIDC</b>=OAuth+identity layer.<br>
+<b>Password storage:</b> never plain or unsalted hash; use bcrypt/argon2.<br>
+<b>OWASP top:</b> broken access ctrl·crypto failures·injection·insecure design·misconfig·vulnerable deps·auth fail·SSRF.
+</section>
+
+<!-- ============ NETWORKING ============ -->
+<section>
+<h2>Networking / Client-Server</h2>
+<b>Architecture:</b> client-server (centralized) vs P2P (decentralized; both producer+consumer). Hybrid: Zoom.<br>
+<b>Throughput</b>=vol/time; <b>latency</b>=time/req. Scale: vertical (bigger) vs horizontal (more).<br>
+<b>TCP/IP stack (top→bottom):</b> 1 Application (HTTP/HTTPS/SSH/DNS/FTP/SMTP) 2 Transport (TCP/UDP) 3 Internet (IPv4/IPv6) 4 Link (Ethernet/WiFi/MAC).<br>
+<b>TCP</b> reliable, ordered, 3-way handshake SYN→SYN-ACK→ACK, teardown FIN. <b>UDP</b> fire-and-forget; for streaming/games/DNS.<br>
+<b>IP:</b> v4 32-bit 4 octets; v6 128-bit. <code>127.0.0.1</code>=localhost. Ports 0-65535; well-known &lt;1024 (80,443,22,25,53).<br>
+<b>DNS</b> name→IP. <b>HTTPS</b>=443; <b>HTTP</b>=80.<br>
+<b>HTTP:</b> stateless req/resp. Verbs: <b>GET</b>(safe,idemp,no body)·<b>POST</b>(create, NOT idemp)·<b>PUT</b>(replace, idemp)·<b>PATCH</b>(partial)·<b>DELETE</b>(idemp)·<b>HEAD</b>·<b>OPTIONS</b>(CORS).<br>
+<b>Safe</b>=read-only. <b>Idempotent</b>=same effect if repeated.<br>
+<b>Status:</b> 1xx info·<b>2xx</b> 200 OK, 201 Created, 204 No Content·<b>3xx</b> 301 perm, 302 found, 304 NotMod·<b>4xx</b> 400 Bad, 401 Unauth, 403 Forbid, 404 NotFound, 409 Conflict, 429 Rate·<b>5xx</b> 500 Err, 502 BadGw, 503 Unavail, 504 GwTimeout.<br>
+<b>Headers:</b> Content-Type (application/json), Authorization, Cookie, CORS (Access-Control-Allow-Origin), Cache-Control.<br>
+<b>URL:</b> <code>scheme://host:port/path?query#frag</code>.<br>
+<b>WebSocket:</b> full-duplex over TCP after HTTP upgrade.<br>
+<b>CORS:</b> browser same-origin policy; server allows cross-origin via headers; preflight OPTIONS for non-simple.<br>
+<b>Inventors:</b> Kahn &amp; Cerf (Cerf @ UCLA).
+</section>
+
+<!-- ============ CLEAN ============ -->
+<section>
+<h2>Clean Code</h2>
+<b>4 Pillars:</b> Meaningful Naming · Simplified Structure · Purposeful Docs · Design by Contract.<br>
+<b>Naming:</b> wrong name &gt; meaningless &gt; vague &gt; precise short. Classes=nouns, methods=verbs. Snake_case Python, camelCase JS/Java/C++.<br>
+<b>Structure:</b> guard clauses (early exit) · avoid deep nesting · short funcs (1 screen) · 5-9 chunks (Miller).<br>
+<b>Comments:</b> WHY not WHAT. Misleading &gt; outdated &gt; absent. Self-documenting names beat comments. Refactor before commenting.<br>
+<b>DbC:</b> pre-cond · post-cond · invariant. <code>assert</code> enforces; <code>-DNDEBUG</code> strips.<br>
+<b>Principles:</b> DRY (Don't Repeat Yourself) · KISS · YAGNI (You Aren't Gonna Need It) · SoC (Sep of Concerns) · POLA (least astonishment) · Law of Demeter (don't talk to strangers; <code>a.b.c.d</code> smell) · Boy Scout / Scout Rule (leave cleaner).<br>
+<b>SOLID:</b><br>
+• <b>S</b>RP: one reason to change<br>
+• <b>O</b>CP: open ext, closed mod<br>
+• <b>L</b>SP: subtype substitutable<br>
+• <b>I</b>SP: small interfaces<br>
+• <b>D</b>IP: depend on abstractions<br>
+<b>Read:Write</b> = 10:1 → 14:1. 58% dev time = understanding.
+</section>
+
+<!-- ============ COMPLEXITY ============ -->
+<section>
+<h2>Managing Complexity</h2>
+<b>Essential vs Accidental</b> complexity (Brooks "No Silver Bullet").<br>
+<b>Big Ball of Mud</b> symptoms: low modifiability, low understandability, high fragility.<br>
+<b>Info Hiding (Parnas):</b> list likely-to-change decisions; each module hides one. Interface=stable WHAT; impl=changeable HOW.<br>
+<b>Deep vs Shallow modules (Ousterhout):</b> small iface hiding big func = GOOD. Wide iface, thin impl = BAD.<br>
+<b>Coupling LOW · Cohesion HIGH.</b> Coupling types: data &lt; stamp &lt; control &lt; common &lt; content. Cohesion: functional &gt; sequential &gt; communicational &gt; procedural &gt; temporal &gt; logical &gt; coincidental.<br>
+<b>Syntactic</b> dep (compiler catches) vs <b>Semantic</b> (sneaky—same design decision).<br>
+<b>Single Choice / DRY:</b> only one module knows full alternatives list.<br>
+<b>Change Impact Analysis:</b> likely + costly → redesign.<br>
+<b>Design process:</b> identify reqs → generate many alts → evaluate → trade off → decide. Generate broad, narrow when evaluating.<br>
+<b>Delay decisions</b> until pressure forces them. Solve simpler problem first.<br>
+<b>Design doc:</b> Context &amp; Scope · Goals/Non-Goals · Design · Alternatives.
+</section>
+
+<!-- ============ COMPREHENSION ============ -->
+<section>
+<h2>Code Comprehension</h2>
+<b>Bottom-up</b> (novice): line-by-line chunking. <b>Top-down</b> (expert): hypothesis-driven, scan for <b>beacons</b>.<br>
+<b>Cycle:</b> hypothesize → hunt beacons → verify/reject → revise. Toggle modes opportunistically.<br>
+<b>5 Beacons:</b> identifier names · code structures (loop/recursion shape) · tests · assertions · diagrams.<br>
+<b>Build domain knowledge</b> first (reqs/architecture).<br>
+<b>58% of dev time</b> = understanding code. Design modules usable w/o reading internals.
+</section>
+
+<!-- ============ REVIEW ============ -->
+<section>
+<h2>Code Review</h2>
+<b>Expectation</b>: find bugs. <b>Reality</b>: knowledge transfer, maintainability—only ~15% defect comments (Bacchelli/Bird).<br>
+<b>Top categories:</b> naming 22%, organization 16%, alt solutions 9% → 50% maintainability.<br>
+<b>Effective PRs:</b> 1-2 reviewers (more=bystander effect); 200-400 LOC; quality drops after 1hr; stack small PRs vs bundle.<br>
+<b>Purposes:</b> readability·teach juniors·norms·history·gatekeeping·accident prevention.<br>
+<b>Checklist:</b> 4 Pillars (Naming/Structure/Docs/Contracts) + correctness + tests + security + perf.<br>
+<b>Scout Rule</b>: leave cleaner; verify nothing hidden.<br>
+<b>New reviewers</b> need 6-12 months to be productive.
+</section>
+
+<!-- ============ DESIGN ============ -->
+<section>
+<h2>Design &amp; Modeling (UML)</h2>
+<b>4 views:</b> Module (Class diag) · Data (ERD) · Component-Connector (runtime) · Behavioral (Sequence/State).<br>
+<b>Class:</b> <code>+</code>pub <code>-</code>priv <code>#</code>prot. <b>Inheritance</b>=open white △. <b>Assoc</b>=line (nav arrow). <b>Aggregation</b>=open ◇ (has-a). <b>Composition</b>=filled ◆ (lifetime). <b>Multiplicity</b> 1, *, 0..1, 1..*.<br>
+<b>ERD:</b> rect=entity, ◇=relation, oval=attr. Cardinality 1:1, 1:N, N:M.<br>
+<b>Sequence:</b> solid▶=sync call·dashed▷=return·open▶=async. Activation bar=executing. Frames: <b>alt</b>(if/else)·<b>opt</b>·<b>loop</b>·<b>par</b>.<br>
+<b>State:</b> rounded states + arrows <code>[guard] event / action</code>; initial=●.<br>
+<b>has-a vs is-a</b>: prefer composition over inheritance.
+</section>
+
+<!-- ============ PATTERNS ============ -->
+<section>
+<h2>Design Patterns (GoF)</h2>
+<b>Definition:</b> Context·Problem·Solution(roles)·Consequences. Pattern=template, not code.<br>
+<b>Creational:</b><br>
+• <b>Singleton</b>—1 instance globally accessible.<br>
+• <b>Factory Method</b>—subclass decides which class to instantiate.<br>
+• <b>Abstract Factory</b>—families of related objects.<br>
+• <b>Builder</b>—step-by-step construct complex object.<br>
+• <b>Prototype</b>—clone existing object.<br>
+<b>Structural:</b><br>
+• <b>Adapter</b>—translate one iface to another (XML↔JSON).<br>
+• <b>Decorator</b>—wrap to add behavior dynamically.<br>
+• <b>Facade</b>—simple iface over subsystem.<br>
+• <b>Proxy</b>—stand-in (lazy/access/remote).<br>
+• <b>Composite</b>—tree of part/whole uniformly.<br>
+• <b>Bridge</b>—decouple abstraction from impl.<br>
+• <b>Flyweight</b>—share many small objects.<br>
+<b>Behavioral:</b><br>
+• <b>Observer</b>—1 Subject:N Observers; auto <code>update()</code> on change (GUI, signals).<br>
+• <b>Publish-Subscribe</b>—N:M via named topic + broker (async, generalizes Observer).<br>
+• <b>Strategy</b>—swap algo via composition; supports OCP.<br>
+• <b>Command</b>—action as object (undo, queue).<br>
+• <b>Iterator</b>—sequential access w/o exposing internals.<br>
+• <b>State</b>—change behavior when internal state changes.<br>
+• <b>Template Method</b>—skeleton in base, hooks in sub.<br>
+• <b>Chain of Responsibility</b>—pass req along handlers.<br>
+• <b>Mediator</b>—central coordinator (reduce N² coupling).<br>
+• <b>Visitor</b>—operation across object structure.<br>
+• <b>Memento</b>—capture/restore state.
+</section>
+
+<!-- ============ REUSE ============ -->
+<section>
+<h2>Design with Reuse</h2>
+<b>Why:</b> productivity, faster TTM, higher quality, fewer defects.<br>
+<b>Reality:</b> partial fit, glue code needed.<br>
+<b>Internal</b> (same org/product line) vs <b>External</b> (COTS/OSS/framework).<br>
+<b>Library</b>: you call it. <b>Framework</b>: it calls you (Inversion of Control = "don't call us, we'll call you"). Framework = less flex, less code.<br>
+<b>White-box</b> reuse (inherit) vs <b>Black-box</b> (compose).<br>
+<b>Dependency Injection</b>: pass collab in, don't <code>new</code>; supports DIP + tests.<br>
+<b>External rules:</b> pin versions (Pipenv/lockfiles); update regularly for CVEs; minimize deps; fit-to-context &gt; popularity.<br>
+<b>Identify violated assumptions</b>: <span class="warn">Ariane 5</span> reused 16-bit horizontal-velocity int → overflow → $370M lost in 37s.<br>
+<b>Cost/benefit:</b> save impl+test vs integration+update+limited changeability.<br>
+<b>Generic-Specific</b>: parameterize, hooks, plugins.
+</section>
+
+<!-- ============ API ============ -->
+<section>
+<h2>API Design &amp; Interop</h2>
+<b>Interop = exchange + use meaningfully.</b> <b>Syntactic</b>(format/types) vs <b>Semantic</b>(units/vocab/side-effects).<br>
+<b class="warn">Mars Climate Orbiter</b>: lbf vs N → $193M lost. Same syntax, different semantics.<br>
+<b>REST:</b> stateless·HTTP verbs as CRUD (POST/GET/PUT/DELETE)·resource URLs <code>/users/123</code>·JSON/XML.<br>
+<b>vs RPC</b> (stateful, action-oriented) · <b>SOAP</b> (XML, complex, enterprise) · <b>GraphQL</b> (schema, client-picked fields).<br>
+<b>Idempotency</b>: same effect repeated. <b>Safety</b>: no side effects.<br>
+<b>Versioning:</b> <code>/v1/</code> in URL or header. Backward-compatible adds OK; removals=major bump.<br>
+<b>Schema</b> (JSON/XML/YAML): types · values (min/max/enum) · structure (required). Enables auto validation.<br>
+<b>Serialization formats:</b> JSON (web), XML (enterprise/SOAP), YAML (config), Protobuf (binary, gRPC), CSV.<br>
+<b>Doc both views:</b> syntactic (params, fmt) + semantic (units, side-effects, errors, examples).<br>
+<b>Extensible iface</b>=add fields w/o breaking clients (ignore unknown).<br>
+<b>Adapter pattern</b> localizes translation.<br>
+<b>Trade-off:</b> richer iface = more flex but harder adoption.
+</section>
+
+<!-- ============ DATA ============ -->
+<section>
+<h2>Data Management</h2>
+<b>DBMS</b> handles concurrency, recovery, indexing, optimization. <b>SQL</b>=declarative (WHAT not HOW).<br>
+<b>ERD → Relations:</b> entity→table, attr→column, relation→FK or junction table (M:N).<br>
+<b>Keys:</b> Primary (unique, NOT NULL); Foreign (refs PK, integrity); Composite; Surrogate.<br>
+<b>SQL:</b>
+<pre>SELECT c, COUNT(*) FROM t
+ WHERE x&gt;0 GROUP BY c
+ HAVING COUNT(*)&gt;1
+ ORDER BY c DESC LIMIT 10;</pre>
+<b>Joins:</b> INNER (matching) · LEFT/RIGHT (keep one side, null other) · FULL OUTER · CROSS (cartesian).<br>
+<b>Normalization:</b> 1NF (atomic) · 2NF (no partial dep) · 3NF (no transitive dep) · BCNF.<br>
+<b>ACID</b> (RDBMS): Atomicity · Consistency · Isolation · Durability. Transactions <code>BEGIN/COMMIT/ROLLBACK</code>.<br>
+<b>CAP theorem (pick 2):</b> Consistency · Availability · Partition tolerance. RDBMS=CA·Cassandra=AP·MongoDB=CP.<br>
+<b>NoSQL types:</b> Document (Mongo)·Key-Value (Redis)·Wide-Column (Cassandra)·Graph (Neo4j). Eventual consistency; horizontal scale; flexible schema.<br>
+<b>Index</b> speeds reads, slows writes. B-tree default.<br>
+<b>SQLi defense:</b> parameterized queries always.
+</section>
+
+<!-- ============ GENAI ============ -->
+<section>
+<h2>Coding with GenAI</h2>
+<b>LLMs:</b> pre-train (corpus) → post-train (RLHF) → inference (non-deterministic). "Statistical parrots"—hallucinate APIs, repeat outdated/insecure code.<br>
+<b>Risks:</b> 40% Copilot suggestions have vulns; Cursor study: +30% warnings, +42% complexity; "skill atrophy" via cognitive offloading.<br>
+<b>Amplifier (DORA):</b> AI boosts high-perf teams (CI/tests/clean arch) and magnifies dysfunction in struggling ones.<br>
+<b>Best practices:</b><br>
+• Mandatory review—treat AI as unreliable teammate.<br>
+• Never commit code you can't explain.<br>
+• AI = knowledgeable intern; YOU architect.<br>
+• Pair: AI as driver/navigator.<br>
+• TDD pairs well with AI (test=verification).<br>
+<b>Good use:</b> scaffolding, refactor, docs, simple debug, prototyping.<br>
+<b>Bad use:</b> business logic, security-critical, performance-critical, stateful complex flows. "Vibe coding" only for hobby.<br>
+<b>Prompt structure:</b> <b>Role</b>+<b>Task</b>+<b>Context</b>+<b>Instructions</b>+acceptance criteria. Split big tasks. Replace-TODO pattern.<br>
+<b>Don't ask</b> "should I use State pattern?" → <b>do ask</b> "what are State pattern trade-offs?"
+</section>
+
+<!-- ============ PEOPLE ============ -->
+<section>
+<h2>People &amp; Processes</h2>
+<b>Paradigms:</b><br>
+• <b>Waterfall</b> (plan-driven): seq phases; stable reqs, high cost of change.<br>
+• <b>Agile/Scrum</b>: iterative sprints, embrace change.<br>
+• <b>Risk-driven (Fairbanks)</b>: upfront design ∝ risk.<br>
+<b>Agile Manifesto:</b> individuals·working sw·collab·response to change &gt; processes·docs·contracts·plan.<br>
+<b>Scrum:</b> Product Backlog → Sprint Planning → Sprint (2-3wk) → Daily Standup → Sprint Review → Retro. Roles: PO, Scrum Master, Dev Team. Planning poker = effort, not time.<br>
+<b>INVEST</b> stories: Independent · Negotiable · Valuable · Estimable · Small · Testable.<br>
+<b>Risk-driven:</b> identify hard-to-change decisions; risk storming; high cost change→more design; preserve changeability via Info Hiding/SOLID.<br>
+<b>Tech debt backlog:</b> dedicate sprint capacity; refactor + docs + perf.<br>
+<b>Decisions:</b> Rational (explicit, justifiable, slow) vs Intuitive (fast, expert, hard to justify). Biases: anchoring·confirmation·bounded rationality.<br>
+<b>Anti-patterns:</b> Ivory Tower architect; one-size-fits-all process.<br>
+<b>Scale:</b> Doghouse vs Skyscraper—right-size the process.<br>
+<b>Adversarial thinking</b>: how could this be abused? complements user stories.<br>
+<b>Archetypes:</b> Meta=fast/break, Google=design docs, NASA=plan-driven V&amp;V, Startup=lean MVP.
+</section>
+
+<!-- ============ FOOTER ============ -->
+<section class="tight">
+<h2>Quick Cross-Refs</h2>
+<b>Idempotent verbs:</b> GET, PUT, DELETE, HEAD, OPTIONS. Not: POST, PATCH.<br>
+<b>Safe verbs:</b> GET, HEAD, OPTIONS.<br>
+<b>Symbols:</b> <code>$@</code>=tgt (make) · <code>$@</code>=all args (bash). <code>$?</code>=newer (make) · <code>$?</code>=exit (bash).<br>
+<b>Equality:</b> Py <code>is None</code>·JS <code>===</code>·Java <code>.equals()</code>·C <code>strcmp</code>·Bash <code>=</code> str / <code>-eq</code> num.<br>
+<b>Order:</b> Pillars=Naming·Structure·Docs·Contracts · CIA=Confid·Integ·Avail · CAP=Consist·Avail·Partition · ACID=A·C·I·D · SOLID=S·O·L·I·D · INVEST=I·N·V·E·S·T.
+</section>
+
+</div>
+
+</body>
+</html>
